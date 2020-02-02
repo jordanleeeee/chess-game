@@ -28,9 +28,7 @@ public class Player {
         System.out.println("hey"+ name+"'s turn");
         for(Chess oneChess: ownedChess){
             Label target = ChessPane.getInstance().getOneCell(oneChess.getCoordinate());
-            System.out.println(oneChess.getCoordinate().toString());
             target.setOnMouseClicked(new SelectNextMoveHandler(oneChess));
         }
     }
-
 }

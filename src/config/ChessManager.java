@@ -10,16 +10,19 @@ import java.util.ArrayList;
 
 public class ChessManager {
 
-    public static ChessManager INSTANCE = null;
-    private ChessPane gamePane;
+    private static ChessManager INSTANCE = null;
+
+    private ChessPane chessPane;
     private ArrayList<Chess> allChess = new ArrayList<>();
     private ArrayList<Chess> blackChess = new ArrayList<>();
     private ArrayList<Chess> whiteChess = new ArrayList<>();
     private int round = 1;
+    private Player black;
+    private Player white;
 
 
-    private ChessManager(ChessPane gamePane){
-        this.gamePane = gamePane;
+    private ChessManager(ChessPane chessPane){
+        this.chessPane = chessPane;
         addChess();
         separateChess();
         visualizeChess();
@@ -64,9 +67,7 @@ public class ChessManager {
 
     private void visualizeChess(){
         for(Chess oneChess: allChess){
-            int width = oneChess.getCoordinate().getCol();
-            int height = oneChess.getCoordinate().getRow();
-            Label target = gamePane.getOneCell(height, width);
+            Label target = chessPane.getOneCell(oneChess.getCoordinate());
             target.setGraphic(new ImageView(oneChess.getIcon()));
             target.setAlignment(Pos.CENTER);
         }
@@ -75,27 +76,20 @@ public class ChessManager {
     public void startGame(Player black, Player white){
         black.addChess(blackChess);
         white.addChess(whiteChess);
-        startIteration(black, white);
+        this.black = black;
+        this.white = white;
+        goNextIteration();
     }
 
-    private void startIteration(Player black, Player white){
-        System.out.println("hey game start, black go first");
-        black.processEachRound();
-//        while(true){
-//            if(round++%2==0){
-//                black.processEachRound();
-//            }
-//            else {
-//                white.processEachRound();
-//            }
-//        }
-    }
-
-    public static ChessManager getInstance(ChessPane gamePane){
-        if(INSTANCE == null){
-            INSTANCE = new ChessManager(gamePane);
+    public void goNextIteration(){
+        clearAllEventHandler();
+        if(++round%2 == 0){
+            System.out.println("black turn");
+            black.processEachRound();
         }
-        return INSTANCE;
+        else{
+            white.processEachRound();
+        }
     }
 
     /**
@@ -104,7 +98,7 @@ public class ChessManager {
      * @return true if have
      */
     public boolean haveChess(Coordinate coord){
-        return (haveChess(coord, true) || haveChess(coord, true));
+        return (haveChess(coord, true) || haveChess(coord, false));
     }
 
     /**
@@ -131,12 +125,29 @@ public class ChessManager {
         return false;
     }
 
+    private void clearAllEventHandler(){
+        for(int i = 0; i< ChessPane.height; i++){
+            for(int j=0; j<ChessPane.width; j++){
+                Label target = chessPane.getOneCell(i, j);
+                target.setStyle(ChessPane.defaultGridStyle);
+                target.setOnMouseClicked(null);
+            }
+        }
+    }
+
+    public static ChessManager getInstance(ChessPane gamePane){
+        if(INSTANCE == null){
+            INSTANCE = new ChessManager(gamePane);
+            return INSTANCE;
+        }
+        throw new IllegalCallerException("cannnot initialize chessPane again");
+    }
+
     public static ChessManager getInstance(){
         if(INSTANCE == null){
             throw new IllegalCallerException("please initialize chessManager first");
         }
         return INSTANCE;
     }
-
 
 }

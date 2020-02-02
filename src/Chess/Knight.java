@@ -20,15 +20,8 @@ public class Knight extends Chess{
     public ArrayList<Coordinate> getAvailableNextMovePosition(){
         ArrayList<Coordinate> possibleMove = currentLocation.get_L_Shape_MovingPosition();
         for(int i=0; i<possibleMove.size(); i++){
-            if(isBlack){
-                if(ChessManager.getInstance().haveChess(possibleMove.get(i), true)){
-                    possibleMove.remove(i--);
-                }
-            }
-            else{
-                if(ChessManager.getInstance().haveChess(possibleMove.get(i), false)){
-                    possibleMove.remove(i--);
-                }
+            if(ChessManager.getInstance().haveChess(possibleMove.get(i), isBlack)){
+                possibleMove.remove(i--);
             }
         }
         return possibleMove;

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 //城堡
 public class Rook extends Chess{
 
+    private ChessManager chessManager = null;
+
     private final Image whiteIcon = new Image("file:resources/whiteRook.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
     private final Image blackIcon = new Image("file:resources/blackRook.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
@@ -19,18 +21,59 @@ public class Rook extends Chess{
 
     @Override
     public ArrayList<Coordinate> getAvailableNextMovePosition() {
-        ArrayList<Coordinate> possibleMove = currentLocation.getCrossMovingPosition();
-        for(int i=0; i<possibleMove.size(); i++){
-            if(isBlack){
-                if(ChessManager.getInstance().haveChess(possibleMove.get(i), true)){
-                    possibleMove.remove(i--);
-                }
+        if(chessManager == null){
+            chessManager = ChessManager.getInstance();
+        }
+        ArrayList<Coordinate> possibleMove = new ArrayList<>();
+        Coordinate tempCoord;
+        tempCoord = currentLocation.getUpward();
+        while (tempCoord.isValidCoordinate()) {
+            if(chessManager.haveChess(tempCoord, isBlack)){
+                break;
             }
-            else{
-                if(ChessManager.getInstance().haveChess(possibleMove.get(i), false)){
-                    possibleMove.remove(i--);
-                }
+            if(chessManager.haveChess(tempCoord, !isBlack)){
+                possibleMove.add(tempCoord);
+                break;
             }
+            possibleMove.add(tempCoord);
+            tempCoord = tempCoord.getUpward();
+        }
+
+        tempCoord = currentLocation.getDownward();
+        while (tempCoord.isValidCoordinate()) {
+            if(chessManager.haveChess(tempCoord, isBlack)){
+                break;
+            }
+            if(chessManager.haveChess(tempCoord, !isBlack)){
+                possibleMove.add(tempCoord);
+                break;
+            }
+            possibleMove.add(tempCoord);
+            tempCoord = tempCoord.getDownward();
+        }
+        tempCoord = currentLocation.getLHS();
+        while (tempCoord.isValidCoordinate()) {
+            if(chessManager.haveChess(tempCoord, isBlack)){
+                break;
+            }
+            if(chessManager.haveChess(tempCoord, !isBlack)){
+                possibleMove.add(tempCoord);
+                break;
+            }
+            possibleMove.add(tempCoord);
+            tempCoord = tempCoord.getLHS();
+        }
+        tempCoord = currentLocation.getRHS();
+        while (tempCoord.isValidCoordinate()) {
+            if(chessManager.haveChess(tempCoord, isBlack)){
+                break;
+            }
+            if(chessManager.haveChess(tempCoord, !isBlack)){
+                possibleMove.add(tempCoord);
+                break;
+            }
+            possibleMove.add(tempCoord);
+            tempCoord = tempCoord.getRHS();
         }
         return possibleMove;
     }

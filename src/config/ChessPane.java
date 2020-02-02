@@ -12,19 +12,17 @@ import util.Coordinate;
 public class ChessPane extends Pane {
 
     private static final ChessPane INSTANCE = new ChessPane();
+
     public static final int height = 8;
     public static final int width = 8;
-    private Label[][] grids;
-    static final int GRID_SIZE = 50;
+    public static final int GRID_SIZE = 50;
     public static final int ICON_SIZE = GRID_SIZE-10;
     public static final String defaultGridStyle = "-fx-border-color: black;";
-    public static final String defaultAvailableMoveGuideStyle = "-fx-border-color: green;";
+    public static final String defaultAvailableMoveGuideStyle = "-fx-border-color: green; -fx-border-width: 3px";
+
+    private Label[][] grids;
 
     private ChessPane(){
-        constructMap();
-    }
-
-    private void constructMap(){
         grids = new Label[height][width];
         for (int i=0; i<height; i++){
             for(int j=0; j<width; j++){

@@ -12,53 +12,6 @@ public class Coordinate {
         this.col = col;
     }
 
-    public ArrayList<Coordinate> getCrossMovingPosition(){
-        ArrayList<Coordinate> possibleMove = new ArrayList<>();
-        int r = row;
-        while(r<ChessPane.height-1){
-            possibleMove.add(new Coordinate(++r, col));
-        }
-        int c = col;
-        while(c<ChessPane.width-1){
-            possibleMove.add(new Coordinate(row, ++c));
-        }
-        r = row;
-        while(r>0){
-            possibleMove.add(new Coordinate(--r, col));
-        }
-        c = col;
-        while(c>0){
-            possibleMove.add(new Coordinate(row, --c));
-        }
-        return possibleMove;
-    }
-
-    public ArrayList<Coordinate> getDiagonalMovingPosition(){
-        ArrayList<Coordinate> possibleMove = new ArrayList<>();
-        int r,c;
-        r=row; c=col;
-        //top right hand side
-        while(r<0 && c<ChessPane.width-1){
-            possibleMove.add(new Coordinate(--r, ++c));
-        }
-        r=row; c=col;
-        //bottom right hand side
-        while(r<ChessPane.height-1 && c<ChessPane.width-1){
-            possibleMove.add(new Coordinate(++r, ++c));
-        }
-        r=row; c=col;
-        //top left hand side
-        while(r<0 && c<0){
-            possibleMove.add(new Coordinate(--r, --c));
-        }
-        r=row; c=col;
-        //bottom left hand side
-        while(r<ChessPane.height-1 && c<0){
-            possibleMove.add(new Coordinate(++r, --c));
-        }
-        return possibleMove;
-    }
-
     public ArrayList<Coordinate> get_L_Shape_MovingPosition(){
         ArrayList<Coordinate> possibleMove = new ArrayList<>();
         possibleMove.add(new Coordinate(row+2, col+1));

@@ -32,11 +32,14 @@ public class Pawn extends Chess{
                 availableMove.add(tempCoord);
             }
             if(isFirstMove) {
-                tempCoord = currentLocation.getDownward().getDownward();
-                if (isValidMove(tempCoord)) {
-                    availableMove.add(tempCoord);
+                if(!chessManager.haveChess(currentLocation.getDownward())) {
+                    tempCoord = currentLocation.getDownward().getDownward();
+                    if (isValidMove(tempCoord)) {
+                        availableMove.add(tempCoord);
+                    }
                 }
             }
+
             tempCoord = currentLocation.getBottomLeft();
             if(isValidKill(tempCoord, true)){
                 availableMove.add(tempCoord);
@@ -52,9 +55,11 @@ public class Pawn extends Chess{
                 availableMove.add(tempCoord);
             }
             if(isFirstMove) {
-                tempCoord = currentLocation.getUpward().getUpward();
-                if (isValidMove(tempCoord)) {
-                    availableMove.add(tempCoord);
+                if(!chessManager.haveChess(currentLocation.getUpward())) {
+                    tempCoord = currentLocation.getUpward().getUpward();
+                    if (isValidMove(tempCoord)) {
+                        availableMove.add(tempCoord);
+                    }
                 }
             }
             tempCoord = currentLocation.getTopLeft();
@@ -66,9 +71,7 @@ public class Pawn extends Chess{
                 availableMove.add(tempCoord);
             }
         }
-        if(isFirstMove){
-            isFirstMove = false;
-        }
+
         return availableMove;
     }
 
@@ -89,6 +92,10 @@ public class Pawn extends Chess{
             return !chessManager.haveChess(coord);
         }
         return false;
+    }
+
+    public void moved(){
+        isFirstMove = false;
     }
 
 }

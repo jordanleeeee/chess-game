@@ -1,27 +1,25 @@
-package Chess;
+package chess;
 
 import config.ChessManager;
 import util.Coordinate;
-import config.ChessPane;
+import view.ChessPane;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 public class Queen extends Chess{
 
-    private ChessManager chessManager = null;
-    private final Image whiteIcon = new Image("file:resources/whiteQueen.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private final Image blackIcon = new Image("file:resources/blackQueen.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image whiteIcon = new Image("file:resources/whiteQueen.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image blackIcon = new Image("file:resources/blackQueen.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public Queen(int row, int col, boolean isBlack) {
-        super(row, col, isBlack);
+        super(row, col, isBlack, blackIcon, whiteIcon);
     }
 
     @Override
     public ArrayList<Coordinate> getAvailableNextMovePosition() {
-        if(chessManager == null){
-            chessManager = ChessManager.getInstance();
-        }
+        ChessManager chessManager = ChessManager.getInstance();
+
         ArrayList<Coordinate> possibleMove = new ArrayList<>();
         Coordinate tempCoord;
 
@@ -125,8 +123,8 @@ public class Queen extends Chess{
     }
 
     @Override
-    public Image getIcon() {
-        return (isBlack)? blackIcon: whiteIcon;
+    public String toString() {
+        return "Queen";
     }
 
 }

@@ -1,30 +1,28 @@
-package Chess;
+package chess;
 
 import config.ChessManager;
 import util.Coordinate;
-import config.ChessPane;
+import view.ChessPane;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Bishop extends Chess{
+//城堡
+public class Rook extends Chess{
 
-    private ChessManager chessManager = null;
-    private final Image whiteIcon = new Image("file:resources/whiteBishop.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private final Image blackIcon = new Image("file:resources/blackBishop.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image whiteIcon = new Image("file:resources/whiteRook.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image blackIcon = new Image("file:resources/blackRook.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
-    public Bishop(int row, int col, boolean isBlack) {
-        super(row, col, isBlack);
+    public Rook(int row, int col, boolean isBlack) {
+        super(row, col, isBlack, blackIcon, whiteIcon);
     }
 
     @Override
     public ArrayList<Coordinate> getAvailableNextMovePosition() {
-        if(chessManager == null){
-            chessManager = ChessManager.getInstance();
-        }
+        ChessManager chessManager = ChessManager.getInstance();
         ArrayList<Coordinate> possibleMove = new ArrayList<>();
         Coordinate tempCoord;
-        tempCoord = currentLocation.getTopRight();
+        tempCoord = currentLocation.getUpward();
         while (tempCoord.isValidCoordinate()) {
             if(chessManager.haveChess(tempCoord, isBlack)){
                 break;
@@ -34,10 +32,10 @@ public class Bishop extends Chess{
                 break;
             }
             possibleMove.add(tempCoord);
-            tempCoord = tempCoord.getTopRight();
+            tempCoord = tempCoord.getUpward();
         }
 
-        tempCoord = currentLocation.getTopLeft();
+        tempCoord = currentLocation.getDownward();
         while (tempCoord.isValidCoordinate()) {
             if(chessManager.haveChess(tempCoord, isBlack)){
                 break;
@@ -47,9 +45,9 @@ public class Bishop extends Chess{
                 break;
             }
             possibleMove.add(tempCoord);
-            tempCoord = tempCoord.getTopLeft();
+            tempCoord = tempCoord.getDownward();
         }
-        tempCoord = currentLocation.getBottomRight();
+        tempCoord = currentLocation.getLHS();
         while (tempCoord.isValidCoordinate()) {
             if(chessManager.haveChess(tempCoord, isBlack)){
                 break;
@@ -59,9 +57,9 @@ public class Bishop extends Chess{
                 break;
             }
             possibleMove.add(tempCoord);
-            tempCoord = tempCoord.getBottomRight();
+            tempCoord = tempCoord.getLHS();
         }
-        tempCoord = currentLocation.getBottomLeft();
+        tempCoord = currentLocation.getRHS();
         while (tempCoord.isValidCoordinate()) {
             if(chessManager.haveChess(tempCoord, isBlack)){
                 break;
@@ -71,14 +69,14 @@ public class Bishop extends Chess{
                 break;
             }
             possibleMove.add(tempCoord);
-            tempCoord = tempCoord.getBottomLeft();
+            tempCoord = tempCoord.getRHS();
         }
         return possibleMove;
     }
 
     @Override
-    public  Image getIcon() {
-        return (isBlack)? blackIcon: whiteIcon;
+    public String toString() {
+        return "Rook";
     }
 
 }

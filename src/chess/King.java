@@ -1,27 +1,25 @@
-package Chess;
+package chess;
 
 import config.ChessManager;
 import util.Coordinate;
-import config.ChessPane;
+import view.ChessPane;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 public class King extends Chess{
 
-    private ChessManager chessManager = null;
-    private final Image whiteIcon = new Image("file:resources/whiteKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private final Image blackIcon = new Image("file:resources/blackKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image whiteIcon = new Image("file:resources/whiteKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image blackIcon = new Image("file:resources/blackKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public King(int row, int col, boolean isBlack) {
-        super(row, col, isBlack);
+        super(row, col, isBlack, blackIcon, whiteIcon);
     }
 
     @Override
     public ArrayList<Coordinate> getAvailableNextMovePosition() {
-        if(chessManager == null){
-            chessManager = ChessManager.getInstance();
-        }
+        ChessManager chessManager = ChessManager.getInstance();
+
         ArrayList<Coordinate> possibleMove = new ArrayList<>();
         Coordinate tempCoord;
 
@@ -62,6 +60,7 @@ public class King extends Chess{
     }
 
     private boolean isValidMove(Coordinate coord, boolean isBlack){
+        ChessManager chessManager = ChessManager.getInstance();
         if(coord.isValidCoordinate()){
             if(!chessManager.haveChess(coord)) {
                 return true;
@@ -73,8 +72,40 @@ public class King extends Chess{
         return false;
     }
 
+    public boolean isCheck(){
+        return isInDanger(currentLocation);
+    }
+
+    public boolean isCheckmate(){
+        ChessManager chessManager = ChessManager.getInstance();
+        ArrayList<Chess> sameColorChess = chessManager.getChess(isBlack);
+        for(Chess oneChess: sameColorChess){
+            ArrayList<Coordinate> allDestination = oneChess.getAvailableNextMovePosition();
+            for(Coordinate oneDestination: allDestination){
+                if(chessManager.moveAllowed(oneChess, oneDestination)){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean isInDanger(Coordinate coord){
+        ChessManager chessManager = ChessManager.getInstance();
+        ArrayList<Chess> opponentChess = chessManager.getChess(!isBlack);
+        for(Chess oneChess: opponentChess){
+            ArrayList<Coordinate> opponentPossibleMove = oneChess.getAvailableNextMovePosition();
+            for(Coordinate onePossibleDestination: opponentPossibleMove){
+                if(onePossibleDestination.equals(coord)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
-    public Image getIcon() {
-        return (isBlack)? blackIcon: whiteIcon;
+    public String toString() {
+        return "King";
     }
 }

@@ -1,9 +1,10 @@
 package util;
 
-import config.ChessPane;
+import view.ChessPane;
 import java.util.ArrayList;
 
 public class Coordinate {
+
     private int row;
     private int col;
 
@@ -85,7 +86,7 @@ public class Coordinate {
 
     @Override
     public String toString(){
-        return "< "+row+", "+col+" >";
+        return "<"+row+", "+col+">";
     }
 
 }

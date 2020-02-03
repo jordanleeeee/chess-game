@@ -1,37 +1,26 @@
 package config;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.Scanner;
+import view.GamePlatformPane;
 
 public class Game extends Application {
 
     static private Player white;
     static private Player black;
-    static private ChessManager chessManager;
 
     @Override
     public void start(Stage stage) {
-        ChessPane gamePane = ChessPane.getInstance();
-        Label nameDetails = new Label("Black: "+black.getName()+" vs White: "+ white.getName());
-        nameDetails.setAlignment(Pos.CENTER);
+        GamePlatformPane gamePlatformPane = GamePlatformPane.getInstance(black, white);
 
-        VBox vBox = new VBox();
-        vBox.getChildren().add(nameDetails);
-        vBox.getChildren().add(gamePane);
-
-        Scene scene = new Scene(vBox);
+        Scene scene = new Scene(gamePlatformPane);
         stage.setTitle("Chess Game");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
 
-        chessManager = ChessManager.getInstance(gamePane);
+        ChessManager chessManager = ChessManager.getInstance();
         chessManager.startGame(black, white);
     }
     public static void main(String[] args){
@@ -45,7 +34,8 @@ public class Game extends Application {
 //        white = new Player(name);
 
         black = new Player("Jordan");
-        white = new Player("Carolyn");
+        //white = new Player("Carolyn");
+        white = new Player("Sharon");
         launch(args);
     }
 }

@@ -1,4 +1,4 @@
-package config;
+package view;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -15,7 +15,7 @@ public class ChessPane extends Pane {
 
     public static final int height = 8;
     public static final int width = 8;
-    public static final int GRID_SIZE = 50;
+    public static final int GRID_SIZE = 60;
     public static final int ICON_SIZE = GRID_SIZE-10;
     public static final String defaultGridStyle = "-fx-border-color: black;";
     public static final String defaultAvailableMoveGuideStyle = "-fx-border-color: green; -fx-border-width: 3px";

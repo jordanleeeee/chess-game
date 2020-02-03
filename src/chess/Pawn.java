@@ -1,29 +1,24 @@
-package Chess;
+package chess;
 
 import config.ChessManager;
 import util.Coordinate;
-import config.ChessPane;
+import view.ChessPane;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 //兵
 public class Pawn extends Chess{
 
-    private ChessManager chessManager = null;
-    private boolean isFirstMove = true;
-
-    private final Image whiteIcon = new Image("file:resources/whitePawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private final Image blackIcon = new Image("file:resources/blackPawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image whiteIcon = new Image("file:resources/whitePawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image blackIcon = new Image("file:resources/blackPawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public Pawn(int row, int col, boolean isBlack) {
-        super(row, col, isBlack);
+        super(row, col, isBlack, blackIcon, whiteIcon);
     }
 
     @Override
     public ArrayList<Coordinate> getAvailableNextMovePosition() {
-        if(chessManager == null){
-            chessManager = ChessManager.getInstance();
-        }
+        ChessManager chessManager = ChessManager.getInstance();
         ArrayList<Coordinate> availableMove = new ArrayList<>();
         Coordinate tempCoord;
         if(isBlack) {
@@ -75,12 +70,8 @@ public class Pawn extends Chess{
         return availableMove;
     }
 
-    @Override
-    public Image getIcon() {
-        return (isBlack)? blackIcon: whiteIcon;
-    }
-
     private boolean isValidKill(Coordinate coord, boolean isBlack){
+        ChessManager chessManager = ChessManager.getInstance();
         if(coord.isValidCoordinate()){
             return chessManager.haveChess(coord, !isBlack);
         }
@@ -88,14 +79,14 @@ public class Pawn extends Chess{
     }
 
     private boolean isValidMove(Coordinate coord){
+        ChessManager chessManager = ChessManager.getInstance();
         if(coord.isValidCoordinate()){
             return !chessManager.haveChess(coord);
         }
         return false;
     }
-
-    public void moved(){
-        isFirstMove = false;
+    @Override
+    public String toString() {
+        return "Pawn";
     }
-
 }

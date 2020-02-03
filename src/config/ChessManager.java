@@ -1,28 +1,41 @@
 package config;
 
-import Chess.*;
+import chess.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import util.Coordinate;
+import util.Movement;
+import util.StepRecorder;
+import view.ChessPane;
+import view.GamePlatformPane;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 public class ChessManager {
 
     private static ChessManager INSTANCE = null;
 
-    private ChessPane chessPane;
+    private ChessPane chessPane = ChessPane.getInstance();
+    private GamePlatformPane gamePlatformPane = GamePlatformPane.getInstance();
+
     private ArrayList<Chess> allChess = new ArrayList<>();
     private ArrayList<Chess> blackChess = new ArrayList<>();
     private ArrayList<Chess> whiteChess = new ArrayList<>();
+
+    private Stack<Chess> killedChess = new Stack<>();
+    private Stack<Chess> killedBlackChess = new Stack<>();
+    private Stack<Chess> killedWhiteChess = new Stack<>();
+
+    private StepRecorder stepRecorder = StepRecorder.getInstance();
+
     private int round = 1;
     private Player black;
     private Player white;
 
 
-    private ChessManager(ChessPane chessPane){
-        this.chessPane = chessPane;
+    private ChessManager(){
         addChess();
         separateChess();
         visualizeChess();
@@ -73,7 +86,7 @@ public class ChessManager {
         }
     }
 
-    public void startGame(Player black, Player white){
+    void startGame(Player black, Player white){
         black.addChess(blackChess);
         white.addChess(whiteChess);
         this.black = black;
@@ -82,14 +95,31 @@ public class ChessManager {
     }
 
     public void goNextIteration(){
+        gamePlatformPane.setSpecialNotice("");
+        System.out.println(stepRecorder.getPeriousMoveDetails());
         clearAllEventHandler();
-        if(++round%2 == 0){
-            System.out.println("black turn");
+
+        boolean isBlackTurn = (++round%2 == 0);
+        if(isGameOver(isBlackTurn)){
+            String msg = "Checkmate...";
+            msg+= (isBlackTurn)?"Black": "White"+" loss... Good Job ";
+            msg+= (!isBlackTurn)? black.getName(): white.getName();
+            gamePlatformPane.setSpecialNotice(msg);
+            return;
+        }
+        if(isBlackTurn){
+            gamePlatformPane.setGameInfo("Black turn");
             black.processEachRound();
         }
         else{
+            gamePlatformPane.setGameInfo("White turn");
             white.processEachRound();
         }
+    }
+
+    public void updateRecord(boolean isBlack, Chess chess, Coordinate from, Coordinate to, boolean isKilling){
+        Player player = (isBlack)? black: white;
+        stepRecorder.addStep(new Movement(player, chess, from, to, isKilling));
     }
 
     /**
@@ -108,21 +138,54 @@ public class ChessManager {
      * @return true if have
      */
     public boolean haveChess(Coordinate coord, boolean isBlack){
-        if(isBlack) {
-            for (Chess oneChess : blackChess) {
-                if (oneChess.getCoordinate().equals(coord)) {
-                    return true;
-                }
-            }
-        }
-        else{
-            for (Chess oneChess : whiteChess) {
-                if (oneChess.getCoordinate().equals(coord)) {
-                    return true;
-                }
+        ArrayList<Chess> targetedChess = (isBlack)? blackChess: whiteChess;
+        for (Chess oneChess : targetedChess) {
+            if (oneChess.getCoordinate().equals(coord)) {
+                return true;
             }
         }
         return false;
+    }
+
+    private void removeOneChess(Coordinate coord, boolean isBlack){
+        if(haveChess(coord)){
+            for(int i=0; i<allChess.size(); i++){
+                if(allChess.get(i).getCoordinate().equals(coord)){
+                    killedChess.push(allChess.get(i));
+                    allChess.remove(i);
+                    break;
+                }
+            }
+            ArrayList<Chess> target = (isBlack)? blackChess: whiteChess;
+            Stack<Chess> killedTarget = (isBlack)? killedBlackChess: killedWhiteChess;
+            for(int i=0; i<target.size(); i++){
+                if(target.get(i).getCoordinate().equals(coord)){
+                    killedTarget.push(target.get(i));
+                    target.remove(i);
+                    break;
+                }
+            }
+        }
+        else {
+            throw new IllegalStateException("no chess in such coordinate");
+        }
+    }
+
+    private void revivalOneChess(){
+        Chess target = killedChess.pop();
+        if(target == null){
+            throw new IllegalStateException();
+        }
+
+        if ((target.isBlack())) {
+            killedBlackChess.pop();
+            blackChess.add(target);
+        }
+        else {
+            killedWhiteChess.pop();
+            whiteChess.add(target);
+        }
+        allChess.add(target);
     }
 
     private void clearAllEventHandler(){
@@ -135,19 +198,53 @@ public class ChessManager {
         }
     }
 
-    public static ChessManager getInstance(ChessPane gamePane){
-        if(INSTANCE == null){
-            INSTANCE = new ChessManager(gamePane);
-            return INSTANCE;
+    private boolean isGameOver(boolean isBlackTurn){
+        return getPlayer(isBlackTurn).isLoss();
+    }
+
+    public boolean moveAllowed(Chess chess, Coordinate destination){
+        Coordinate currentLocation = chess.getCoordinate();
+        boolean haveChessGotKilled = processKillingChess(chess, destination);
+        chess.setCurrentLocation(destination);
+        if (getPlayer(chess.isBlack()).isInDanger()) {
+            chess.setCurrentLocation(currentLocation);
+            if(haveChessGotKilled){
+                revivalOneChess();
+            }
+            return false;
         }
-        throw new IllegalCallerException("cannnot initialize chessPane again");
+        chess.setCurrentLocation(currentLocation);
+        if(haveChessGotKilled){
+            revivalOneChess();
+        }
+        return true;
+    }
+
+    /**
+     * check if some chess being killed, if yes, remove that chess and return true
+     * @return true of some chess being killed
+     */
+    public boolean processKillingChess(Chess chess, Coordinate destination){
+        if(haveChess(destination)){
+            removeOneChess(destination, !chess.isBlack());
+            return true;
+        }
+        return false;
     }
 
     public static ChessManager getInstance(){
         if(INSTANCE == null){
-            throw new IllegalCallerException("please initialize chessManager first");
+            INSTANCE = new ChessManager();
         }
         return INSTANCE;
+    }
+
+    public ArrayList<Chess> getChess(boolean isBlack){
+        return (isBlack)? blackChess: whiteChess;
+    }
+
+    private Player getPlayer(boolean isBlack) {
+        return (isBlack)? black: white;
     }
 
 }

@@ -1,8 +1,8 @@
 package eventHandler;
 
-import Chess.Chess;
+import chess.Chess;
 import config.ChessManager;
-import config.ChessPane;
+import view.ChessPane;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -25,7 +25,7 @@ public class SelectNextMoveHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         changeBackToDefaultChessBoard();
-        System.out.println("chess clicked "+ chess.getClass().getName());
+        //System.out.println("chess clicked "+ chess.getClass().getName());
         ArrayList<Coordinate> availableNextMove = chess.getAvailableNextMovePosition();
         for(Coordinate destination: availableNextMove){
             Label target = ChessPane.getInstance().getOneCell(destination);
@@ -39,7 +39,7 @@ public class SelectNextMoveHandler implements EventHandler<MouseEvent> {
             for(int j=0; j<ChessPane.width; j++){
                 Label target = chessPane.getOneCell(i, j);
                 target.setStyle(ChessPane.defaultGridStyle);
-                //clear all grid with no chess(same color)
+                //clear eventHandler of all grid with no same color chess
                 if(!chessManager.haveChess(new Coordinate(i, j), chess.isBlack())){
                     target.setOnMouseClicked(null);
                 }

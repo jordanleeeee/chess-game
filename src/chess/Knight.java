@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Knight extends Chess{
 
-    private static final Image whiteIcon = new Image("file:resources/whiteKnight.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private static final Image blackIcon = new Image("file:resources/blackKnight.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image whiteIcon = new Image("file:resources/whiteKnight.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image blackIcon = new Image("file:resources/blackKnight.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public Knight(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);

@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Bishop extends Chess{
 
-    private static final Image whiteIcon = new Image("file:resources/whiteBishop.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private static final Image blackIcon = new Image("file:resources/blackBishop.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image whiteIcon = new Image("file:resources/whiteBishop.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image blackIcon = new Image("file:resources/blackBishop.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public Bishop(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);

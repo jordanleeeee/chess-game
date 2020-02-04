@@ -4,9 +4,9 @@ import chess.*;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import util.Coordinate;
-import util.Movement;
-import util.StepRecorder;
+import org.jetbrains.annotations.NotNull;
+import util.*;
+import view.ButtonSelectionStage;
 import view.ChessPane;
 import view.GamePlatformPane;
 
@@ -15,12 +15,12 @@ import java.util.Stack;
 
 public class ChessManager {
 
+
     private static ChessManager INSTANCE = null;
 
     private ChessPane chessPane = ChessPane.getInstance();
     private GamePlatformPane gamePlatformPane = GamePlatformPane.getInstance();
 
-    private ArrayList<Chess> allChess = new ArrayList<>();
     private ArrayList<Chess> blackChess = new ArrayList<>();
     private ArrayList<Chess> whiteChess = new ArrayList<>();
 
@@ -37,56 +37,45 @@ public class ChessManager {
 
     private ChessManager(){
         addChess();
-        separateChess();
-        visualizeChess();
+        visualizeChess(blackChess);
+        visualizeChess(whiteChess);
     }
 
     private void addChess(){
-        allChess.add(new Rook(0,0, true));
-        allChess.add(new Knight(0,1, true));
-        allChess.add(new Bishop(0,2, true));
-        allChess.add(new Queen(0,3, true));
-        allChess.add(new King(0,4, true));
-        allChess.add(new Bishop(0,5, true));
-        allChess.add(new Knight(0,6, true));
-        allChess.add(new Rook(0,7, true));
+        blackChess.add(new Rook(0,0, true));
+        blackChess.add(new Knight(0,1, true));
+        blackChess.add(new Bishop(0,2, true));
+        blackChess.add(new Queen(0,4, true));
+        blackChess.add(new King(0,3, true));
+        blackChess.add(new Bishop(0,5, true));
+        blackChess.add(new Knight(0,6, true));
+        blackChess.add(new Rook(0,7, true));
         for (int i=0; i<ChessPane.width; i++){
-            allChess.add(new Pawn(1,i, true));
+            blackChess.add(new Pawn(1,i, true));
         }
 
         for (int i=0; i<ChessPane.width; i++){
-            allChess.add(new Pawn(6,i, false));
+            whiteChess.add(new Pawn(6,i, false));
         }
-        allChess.add(new Rook(7,7, false));
-        allChess.add(new Knight(7,6, false));
-        allChess.add(new Bishop(7,5, false));
-        allChess.add(new Queen(7,4, false));
-        allChess.add(new King(7,3, false));
-        allChess.add(new Bishop(7,2, false));
-        allChess.add(new Knight(7,1, false));
-        allChess.add(new Rook(7,0, false));
+        whiteChess.add(new Rook(7,7, false));
+        whiteChess.add(new Knight(7,6, false));
+        whiteChess.add(new Bishop(7,5, false));
+        whiteChess.add(new Queen(7,3, false));
+        whiteChess.add(new King(7,4, false));
+        whiteChess.add(new Bishop(7,2, false));
+        whiteChess.add(new Knight(7,1, false));
+        whiteChess.add(new Rook(7,0, false));
     }
 
-    private void separateChess(){
-        for(Chess oneChess: allChess){
-            if(oneChess.isBlack()){
-                blackChess.add(oneChess);
-            }
-            else{
-                whiteChess.add(oneChess);
-            }
-        }
-    }
-
-    private void visualizeChess(){
-        for(Chess oneChess: allChess){
+    private void visualizeChess(ArrayList<Chess> chess){
+        for(Chess oneChess: chess){
             Label target = chessPane.getOneCell(oneChess.getCoordinate());
             target.setGraphic(new ImageView(oneChess.getIcon()));
             target.setAlignment(Pos.CENTER);
         }
     }
 
-    void startGame(Player black, Player white){
+    void startGame(@NotNull Player black, @NotNull Player white){
         black.addChess(blackChess);
         white.addChess(whiteChess);
         this.black = black;
@@ -96,17 +85,26 @@ public class ChessManager {
 
     public void goNextIteration(){
         gamePlatformPane.setSpecialNotice("");
-        System.out.println(stepRecorder.getPeriousMoveDetails());
-        clearAllEventHandler();
+        System.out.println(stepRecorder.getPreviousMoveDetails());
 
         boolean isBlackTurn = (++round%2 == 0);
         if(isGameOver(isBlackTurn)){
-            String msg = "Checkmate...";
-            msg+= (isBlackTurn)?"Black": "White"+" loss... Good Job ";
-            msg+= (!isBlackTurn)? black.getName(): white.getName();
-            gamePlatformPane.setSpecialNotice(msg);
+            praseTheWinner(isBlackTurn, true);
             return;
         }
+        processPlayer(isBlackTurn);
+    }
+
+    public void praseTheWinner(boolean isBlackTurn, boolean isCheckmate){
+        String msg = "";
+        if(isCheckmate) { msg += "Checkmate...";}
+        msg+= (isBlackTurn)?"Black": "White";
+        msg+=" loss... Good Job ";
+        msg+= (!isBlackTurn)? black.getName(): white.getName();
+        gamePlatformPane.setSpecialNotice(msg);
+    }
+    private void processPlayer(boolean isBlackTurn){
+        clearAllEventHandler();
         if(isBlackTurn){
             gamePlatformPane.setGameInfo("Black turn");
             black.processEachRound();
@@ -117,9 +115,9 @@ public class ChessManager {
         }
     }
 
-    public void updateRecord(boolean isBlack, Chess chess, Coordinate from, Coordinate to, boolean isKilling){
-        Player player = (isBlack)? black: white;
-        stepRecorder.addStep(new Movement(player, chess, from, to, isKilling));
+    public void updateRecord(@NotNull Chess chess, @NotNull Coordinate from, @NotNull Coordinate to, boolean isKilling, boolean castingHappened){
+        Player player = (chess.isBlack())? black: white;
+        stepRecorder.addStep(new Movement(player, chess, from, to, isKilling, castingHappened));
     }
 
     /**
@@ -127,7 +125,7 @@ public class ChessManager {
      * @param coord coordinate
      * @return true if have
      */
-    public boolean haveChess(Coordinate coord){
+    public boolean haveChess(@NotNull Coordinate coord){
         return (haveChess(coord, true) || haveChess(coord, false));
     }
 
@@ -137,7 +135,7 @@ public class ChessManager {
      * @param isBlack check black cell
      * @return true if have
      */
-    public boolean haveChess(Coordinate coord, boolean isBlack){
+    public boolean haveChess(@NotNull Coordinate coord, boolean isBlack){
         ArrayList<Chess> targetedChess = (isBlack)? blackChess: whiteChess;
         for (Chess oneChess : targetedChess) {
             if (oneChess.getCoordinate().equals(coord)) {
@@ -147,19 +145,13 @@ public class ChessManager {
         return false;
     }
 
-    private void removeOneChess(Coordinate coord, boolean isBlack){
+    private void removeOneChess(@NotNull Coordinate coord, boolean isBlack){
         if(haveChess(coord)){
-            for(int i=0; i<allChess.size(); i++){
-                if(allChess.get(i).getCoordinate().equals(coord)){
-                    killedChess.push(allChess.get(i));
-                    allChess.remove(i);
-                    break;
-                }
-            }
             ArrayList<Chess> target = (isBlack)? blackChess: whiteChess;
             Stack<Chess> killedTarget = (isBlack)? killedBlackChess: killedWhiteChess;
             for(int i=0; i<target.size(); i++){
                 if(target.get(i).getCoordinate().equals(coord)){
+                    killedChess.push(target.get(i));
                     killedTarget.push(target.get(i));
                     target.remove(i);
                     break;
@@ -171,7 +163,7 @@ public class ChessManager {
         }
     }
 
-    private void revivalOneChess(){
+    public void revivalOneChess(){
         Chess target = killedChess.pop();
         if(target == null){
             throw new IllegalStateException();
@@ -185,7 +177,7 @@ public class ChessManager {
             killedWhiteChess.pop();
             whiteChess.add(target);
         }
-        allChess.add(target);
+        chessPane.getOneCell(target.getCoordinate()).setGraphic(new ImageView(target.getIcon()));
     }
 
     private void clearAllEventHandler(){
@@ -198,11 +190,16 @@ public class ChessManager {
         }
     }
 
-    private boolean isGameOver(boolean isBlackTurn){
+    public void resign(){
+        boolean isBlack = (round%2 ==0);
+        getPlayer(isBlack).isResign();
+    }
+
+    boolean isGameOver(boolean isBlackTurn){
         return getPlayer(isBlackTurn).isLoss();
     }
 
-    public boolean moveAllowed(Chess chess, Coordinate destination){
+    public boolean moveAllowed(@NotNull Chess chess, @NotNull Coordinate destination){
         Coordinate currentLocation = chess.getCoordinate();
         boolean haveChessGotKilled = processKillingChess(chess, destination);
         chess.setCurrentLocation(destination);
@@ -224,12 +221,80 @@ public class ChessManager {
      * check if some chess being killed, if yes, remove that chess and return true
      * @return true of some chess being killed
      */
-    public boolean processKillingChess(Chess chess, Coordinate destination){
+    public boolean processKillingChess(@NotNull Chess chess, @NotNull Coordinate destination){
         if(haveChess(destination)){
             removeOneChess(destination, !chess.isBlack());
             return true;
         }
         return false;
+    }
+
+    public void undoStep(){
+        Movement previousMovement = stepRecorder.processUndo();
+        if(previousMovement != null) {
+            previousMovement.reverseMovement();
+            processPlayer((--round%2==0));
+        }
+    }
+
+    public void chessClicked(@NotNull Chess chess, @NotNull String newType){
+        ArrayList<Chess> target = (chess.isBlack())? blackChess: whiteChess;
+        switch (newType) {
+            case "Queen":
+                for(int i=0; i<target.size(); i++){
+                    if(target.get(i) == chess){
+                        Chess newChess = new Queen(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
+                        target.add(newChess);
+                        chessPane.getOneCell(chess.getCoordinate()).setGraphic(new ImageView(newChess.getIcon()));
+                        target.remove(i);
+                        break;
+                    }
+                }
+                break;
+            case "Knight":
+                for(int i=0; i<target.size(); i++){
+                    if(target.get(i) == chess){
+                        Chess newChess = new Knight(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
+                        target.add(newChess);
+                        chessPane.getOneCell(chess.getCoordinate()).setGraphic(new ImageView(newChess.getIcon()));
+                        target.remove(i);
+                        break;
+                    }
+                }
+                break;
+            case "Bishop":
+                for(int i=0; i<target.size(); i++){
+                    if(target.get(i) == chess){
+                        Chess newChess = new Bishop(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
+                        target.add(newChess);
+                        chessPane.getOneCell(chess.getCoordinate()).setGraphic(new ImageView(newChess.getIcon()));
+                        target.remove(i);
+                        break;
+                    }
+                }
+                break;
+            case "Rook":
+                for(int i=0; i<target.size(); i++){
+                    if(target.get(i) == chess){
+                        Chess newChess = new Rook(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
+                        target.add(newChess);
+                        chessPane.getOneCell(chess.getCoordinate()).setGraphic(new ImageView(newChess.getIcon()));
+                        target.remove(i);
+                        break;
+                    }
+                }
+                break;
+            default: throw new IllegalStateException();
+        }
+    }
+
+    private void generateSelectionPane(@NotNull Chess chess){
+        ButtonSelectionStage stage = new ButtonSelectionStage(chess);
+        stage.showAndWait();
+    }
+
+    public void promotion(@NotNull Chess chess){
+        generateSelectionPane(chess);
     }
 
     public static ChessManager getInstance(){
@@ -241,6 +306,20 @@ public class ChessManager {
 
     public ArrayList<Chess> getChess(boolean isBlack){
         return (isBlack)? blackChess: whiteChess;
+    }
+
+    public Chess getOneChess(Coordinate coord){
+        for(Chess oneChess: blackChess){
+            if(oneChess.getCoordinate().equals(coord)){
+                return oneChess;
+            }
+        }
+        for(Chess oneChess: whiteChess){
+            if(oneChess.getCoordinate().equals(coord)){
+                return oneChess;
+            }
+        }
+        return null;
     }
 
     private Player getPlayer(boolean isBlack) {

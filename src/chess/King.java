@@ -9,16 +9,19 @@ import java.util.ArrayList;
 
 public class King extends Chess{
 
-    private static final Image whiteIcon = new Image("file:resources/whiteKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private static final Image blackIcon = new Image("file:resources/blackKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image whiteIcon = new Image("file:resources/whiteKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image blackIcon = new Image("file:resources/blackKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public King(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);
     }
 
+//    public ArrayList<Coordinate> getAvailableNextMovePosition(boolean real){
+//        return getAvailableNextMovePosition();
+//    }
+
     @Override
     public ArrayList<Coordinate> getAvailableNextMovePosition() {
-        ChessManager chessManager = ChessManager.getInstance();
 
         ArrayList<Coordinate> possibleMove = new ArrayList<>();
         Coordinate tempCoord;
@@ -55,8 +58,59 @@ public class King extends Chess{
         if(isValidMove(tempCoord, isBlack)){
             possibleMove.add(tempCoord);
         }
-
         return possibleMove;
+    }
+
+    public Coordinate dealWithCastingCase(){
+        if(canCasting()){
+            if(isBlack){
+                return currentLocation.getLHS().getLHS();
+            }
+            else{
+                return currentLocation.getRHS().getRHS();
+            }
+        }
+        return null;
+    }
+
+    private boolean canCasting(){
+        ChessManager chessManager = ChessManager.getInstance();
+
+        if(!isCheck()) {
+            if (isBlack) {
+                if (!chessManager.haveChess(currentLocation.getLHS())) {
+                    if (!chessManager.haveChess(currentLocation.getLHS().getLHS())) {
+                        if (this.movingTimes == 0) {
+                            Chess targetRook = chessManager.getOneChess(currentLocation.getLHS().getLHS().getLHS());
+                            if (targetRook != null) {
+                                if (targetRook instanceof Rook) {
+                                    if (targetRook.isBlack) {
+                                        return targetRook.movingTimes == 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                if(!chessManager.haveChess(currentLocation.getRHS())){
+                    if(!chessManager.haveChess(currentLocation.getRHS().getRHS())){
+                        if(this.movingTimes==0){
+                            Chess targetRook = chessManager.getOneChess(currentLocation.getRHS().getRHS().getRHS());
+                            if(targetRook != null){
+                                if(targetRook instanceof  Rook){
+                                    if(!targetRook.isBlack){
+                                        return targetRook.movingTimes == 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     private boolean isValidMove(Coordinate coord, boolean isBlack){

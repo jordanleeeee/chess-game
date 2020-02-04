@@ -2,6 +2,7 @@ package util;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import view.GamePlatformPane;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
@@ -18,7 +19,7 @@ public class StepRecorder {
         movements.add(movement);
     }
 
-    public String getPeriousMoveDetails(){
+    public String getPreviousMoveDetails(){
         try {
             String info = movements.peek().toString();
             moves.add(info);
@@ -27,6 +28,16 @@ public class StepRecorder {
         catch (EmptyStackException e) {
             return "Ready? Go!!!";
         }
+    }
+
+    public Movement processUndo(){
+        if(moves.size() == 0){
+            GamePlatformPane.getInstance().setSpecialNotice("No step to undo any more");
+            return null;
+        }
+        moves.remove(moves.size() - 1);
+        return movements.pop();
+
     }
 
     public ObservableList<String> getMoves(){

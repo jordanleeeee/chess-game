@@ -9,8 +9,8 @@ import java.util.ArrayList;
 //兵
 public class Pawn extends Chess{
 
-    private static final Image whiteIcon = new Image("file:resources/whitePawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private static final Image blackIcon = new Image("file:resources/blackPawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image whiteIcon = new Image("file:resources/whitePawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image blackIcon = new Image("file:resources/blackPawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public Pawn(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);
@@ -26,7 +26,7 @@ public class Pawn extends Chess{
             if (isValidMove(tempCoord)) {
                 availableMove.add(tempCoord);
             }
-            if(isFirstMove) {
+            if(movingTimes == 0 ) {
                 if(!chessManager.haveChess(currentLocation.getDownward())) {
                     tempCoord = currentLocation.getDownward().getDownward();
                     if (isValidMove(tempCoord)) {
@@ -49,7 +49,7 @@ public class Pawn extends Chess{
             if (isValidMove(tempCoord)) {
                 availableMove.add(tempCoord);
             }
-            if(isFirstMove) {
+            if(movingTimes==0) {
                 if(!chessManager.haveChess(currentLocation.getUpward())) {
                     tempCoord = currentLocation.getUpward().getUpward();
                     if (isValidMove(tempCoord)) {
@@ -84,6 +84,15 @@ public class Pawn extends Chess{
             return !chessManager.haveChess(coord);
         }
         return false;
+    }
+
+    public boolean isReachedBoundary(){
+        if(isBlack){
+            return currentLocation.getRow() == ChessPane.height - 1;
+        }
+        else{
+            return currentLocation.getRow() == 0;
+        }
     }
     @Override
     public String toString() {

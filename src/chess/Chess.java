@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public abstract class Chess {
 
-    protected boolean isBlack;
-    protected boolean isFirstMove = true;
+    boolean isBlack;
+    int movingTimes = 0;
     Coordinate currentLocation;
     private final Image blackIcon;
     private final Image whiteIcon;
@@ -31,7 +31,10 @@ public abstract class Chess {
         return (isBlack)? blackIcon: whiteIcon;
     }
     public void setIsMoved(){
-        isFirstMove = false;
+        movingTimes++;
+    }
+    public void experienceReverseMovement(){
+        movingTimes--;
     }
 
     public abstract ArrayList<Coordinate> getAvailableNextMovePosition();

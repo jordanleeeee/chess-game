@@ -35,7 +35,9 @@ public class Game extends Application {
 
         black = new Player("Jordan");
         //white = new Player("Carolyn");
-        white = new Player("Sharon");
+
+        //white = new Player("Sharon");
+        white = new Player("Rainbow");
         launch(args);
     }
 }

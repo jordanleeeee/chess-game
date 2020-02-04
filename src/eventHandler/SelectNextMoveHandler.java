@@ -1,6 +1,7 @@
 package eventHandler;
 
 import chess.Chess;
+import chess.King;
 import config.ChessManager;
 import view.ChessPane;
 import javafx.event.EventHandler;
@@ -25,12 +26,20 @@ public class SelectNextMoveHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         changeBackToDefaultChessBoard();
-        //System.out.println("chess clicked "+ chess.getClass().getName());
+        System.out.println("chess clicked "+ chess.getClass().getName());
         ArrayList<Coordinate> availableNextMove = chess.getAvailableNextMovePosition();
         for(Coordinate destination: availableNextMove){
             Label target = ChessPane.getInstance().getOneCell(destination);
             target.setStyle(ChessPane.defaultAvailableMoveGuideStyle);
-            target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, destination));
+            target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, destination, false));
+        }
+        if(chess instanceof King){
+            Coordinate castingTarget = ((King) chess).dealWithCastingCase();
+            if(castingTarget != null) {
+                Label target = ChessPane.getInstance().getOneCell(castingTarget);
+                target.setStyle(ChessPane.defaultAvailableMoveGuideStyle);
+                target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, castingTarget, true));
+            }
         }
     }
 

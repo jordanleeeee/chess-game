@@ -1,6 +1,7 @@
 package util;
 
 import view.ChessPane;
+
 import java.util.ArrayList;
 
 public class Coordinate {
@@ -13,6 +14,21 @@ public class Coordinate {
         this.col = col;
     }
 
+    public ArrayList<Coordinate> getSoundingPosition(){
+        ArrayList<Coordinate> possibleMove = new ArrayList<>();
+        possibleMove.add(getUpward());
+        possibleMove.add(getDownward());
+        possibleMove.add(getLHS());
+        possibleMove.add(getRHS());
+        possibleMove.add(getTopLeft());
+        possibleMove.add(getTopRight());
+        possibleMove.add(getBottomLeft());
+        possibleMove.add(getBottomRight());
+
+        removeInvalidCoordinate(possibleMove);
+        return possibleMove;
+    }
+
     public ArrayList<Coordinate> get_L_Shape_MovingPosition(){
         ArrayList<Coordinate> possibleMove = new ArrayList<>();
         possibleMove.add(new Coordinate(row+2, col+1));
@@ -23,12 +39,17 @@ public class Coordinate {
         possibleMove.add(new Coordinate(row+1, col-2));
         possibleMove.add(new Coordinate(row-1, col+2));
         possibleMove.add(new Coordinate(row+1, col+2));
+
+        removeInvalidCoordinate(possibleMove);
+        return possibleMove;
+    }
+
+    private void removeInvalidCoordinate(ArrayList<Coordinate> possibleMove){
         for(int i=0; i<possibleMove.size(); i++){
             if(!possibleMove.get(i).isValidCoordinate()){
                 possibleMove.remove(i--);
             }
         }
-        return possibleMove;
     }
 
     public Coordinate getUpward(){

@@ -1,6 +1,11 @@
 package chess;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import util.Coordinate;
+import view.ChessPane;
+
 import java.util.ArrayList;
 
 public abstract class Chess {
@@ -32,11 +37,24 @@ public abstract class Chess {
     }
     public void setIsMoved(){
         movingTimes++;
+        visualizeChess();
     }
     public void experienceReverseMovement(){
         movingTimes--;
     }
+    public void visualizeChess(){
+        Label target = ChessPane.getInstance().getOneCell(currentLocation);
+        target.setGraphic(new ImageView((isBlack)? blackIcon: whiteIcon));
+        target.setAlignment(Pos.CENTER);
+    }
+    public void clearChessIcon(){
+        ChessPane.getInstance().getOneCell(currentLocation).setGraphic(null);
+    }
 
+    /**
+     * get list of possible move of the chess (according to moving rules)
+     * @return list of coordinate
+     */
     public abstract ArrayList<Coordinate> getAvailableNextMovePosition();
 
     @Override

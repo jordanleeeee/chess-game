@@ -94,6 +94,7 @@ public class Pawn extends Chess{
             return currentLocation.getRow() == 0;
         }
     }
+
     @Override
     public String toString() {
         return "Pawn";

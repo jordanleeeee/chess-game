@@ -43,11 +43,12 @@ public class ConfirmMoveEventHandler implements EventHandler<MouseEvent> {
     }
 
     private void movingChessAndItsIcon(){
-        chessPane.getOneCell(from).setGraphic(null);
-        boolean isKilling = chessManager.processKillingChess(chess, destination);
+        chess.clearChessIcon();
         chess.setCurrentLocation(destination);
-        chessPane.getOneCell(destination).setGraphic(new ImageView(chess.getIcon()));
+        chess.visualizeChess();
         chess.setIsMoved();
+
+        boolean isKilling = chessManager.seeIfChessIsKillAfterMove(chess, destination);
 
         if(castingHappened){
             if(chess.isBlack()){

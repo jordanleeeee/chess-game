@@ -7,6 +7,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 import util.Coordinate;
 
 public class ChessPane extends Pane {
@@ -52,7 +53,7 @@ public class ChessPane extends Pane {
         return grids[row][col];
     }
 
-    public Label getOneCell(Coordinate coord){
+    public Label getOneCell(@NotNull Coordinate coord){
         return grids[coord.getRow()][coord.getCol()];
     }
 

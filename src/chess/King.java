@@ -16,47 +16,15 @@ public class King extends Chess{
         super(row, col, isBlack, blackIcon, whiteIcon);
     }
 
-//    public ArrayList<Coordinate> getAvailableNextMovePosition(boolean real){
-//        return getAvailableNextMovePosition();
-//    }
-
     @Override
     public ArrayList<Coordinate> getAvailableNextMovePosition() {
+        ChessManager chessManager = ChessManager.getInstance();
+        ArrayList<Coordinate> possibleMove = currentLocation.getSoundingPosition();
 
-        ArrayList<Coordinate> possibleMove = new ArrayList<>();
-        Coordinate tempCoord;
-
-        tempCoord = currentLocation.getUpward();
-        if(isValidMove(tempCoord, isBlack)){
-            possibleMove.add(tempCoord);
-        }
-        tempCoord = currentLocation.getDownward();
-        if(isValidMove(tempCoord, isBlack)){
-            possibleMove.add(tempCoord);
-        }
-        tempCoord = currentLocation.getLHS();
-        if(isValidMove(tempCoord, isBlack)){
-            possibleMove.add(tempCoord);
-        }
-        tempCoord = currentLocation.getRHS();
-        if(isValidMove(tempCoord, isBlack)){
-            possibleMove.add(tempCoord);
-        }
-        tempCoord = currentLocation.getBottomRight();
-        if(isValidMove(tempCoord, isBlack)){
-            possibleMove.add(tempCoord);
-        }
-        tempCoord = currentLocation.getBottomLeft();
-        if(isValidMove(tempCoord, isBlack)){
-            possibleMove.add(tempCoord);
-        }
-        tempCoord = currentLocation.getTopRight();
-        if(isValidMove(tempCoord, isBlack)){
-            possibleMove.add(tempCoord);
-        }
-        tempCoord = currentLocation.getTopLeft();
-        if(isValidMove(tempCoord, isBlack)){
-            possibleMove.add(tempCoord);
+        for (int i = 0; i < possibleMove.size(); i++) {
+            if(chessManager.haveChess(possibleMove.get(i), isBlack)){
+                possibleMove.remove(i--);
+            }
         }
         return possibleMove;
     }
@@ -113,23 +81,10 @@ public class King extends Chess{
         return false;
     }
 
-    private boolean isValidMove(Coordinate coord, boolean isBlack){
-        ChessManager chessManager = ChessManager.getInstance();
-        if(coord.isValidCoordinate()){
-            if(!chessManager.haveChess(coord)) {
-                return true;
-            }
-            else {
-                return !chessManager.haveChess(coord, isBlack);
-            }
-        }
-        return false;
-    }
-
-    public boolean isCheck(){
-        return isInDanger(currentLocation);
-    }
-
+    /**
+     * check if is in Checkmate condition i.e. no possible move to protect the king
+     * @return true if yes
+     */
     public boolean isCheckmate(){
         ChessManager chessManager = ChessManager.getInstance();
         ArrayList<Chess> sameColorChess = chessManager.getChess(isBlack);
@@ -144,13 +99,16 @@ public class King extends Chess{
         return true;
     }
 
-    private boolean isInDanger(Coordinate coord){
-        ChessManager chessManager = ChessManager.getInstance();
-        ArrayList<Chess> opponentChess = chessManager.getChess(!isBlack);
+    /**
+     * check if the chess(King) is threatened by opponent's chess
+     * @return true if yes
+     */
+    public boolean isCheck(){
+        ArrayList<Chess> opponentChess = ChessManager.getInstance().getChess(!isBlack);
         for(Chess oneChess: opponentChess){
             ArrayList<Coordinate> opponentPossibleMove = oneChess.getAvailableNextMovePosition();
             for(Coordinate onePossibleDestination: opponentPossibleMove){
-                if(onePossibleDestination.equals(coord)){
+                if(onePossibleDestination.equals(currentLocation)){
                     return true;
                 }
             }

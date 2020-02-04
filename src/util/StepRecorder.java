@@ -19,15 +19,12 @@ public class StepRecorder {
         movements.add(movement);
     }
 
-    public String getPreviousMoveDetails(){
+    public void generatePreviousMoveDetails(){
         try {
             String info = movements.peek().toString();
             moves.add(info);
-            return info;
         }
-        catch (EmptyStackException e) {
-            return "Ready? Go!!!";
-        }
+        catch (EmptyStackException ignored){}
     }
 
     public Movement processUndo(){

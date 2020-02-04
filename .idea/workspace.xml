@@ -3,37 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="20dc7404-5a19-4170-a951-c31f64d6c193" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Bishop.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/Chess/Bishop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Chess.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/Chess/Chess.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/King.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/Chess/King.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Knight.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/Chess/Knight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Pawn.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/Chess/Pawn.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Queen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/Chess/Queen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Rook.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/Chess/Rook.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/ChessPane.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/GamePlatformPane.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessGame/eventHandler/ConfirmMoveEventHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/eventHandler/ConfirmMoveEventHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/eventHandler/SelectNextMoveHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/eventHandler/SelectNextMoveHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessGame/util/Coordinate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/util/Coordinate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/util/Movement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/util/Movement.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Bishop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/chess/Chess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Chess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/chess/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Knight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/chess/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Queen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/chess/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Rook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/ChessManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/ChessManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/eventHandler/ConfirmMoveEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eventHandler/ConfirmMoveEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/eventHandler/SelectNextMoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eventHandler/SelectNextMoveHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/Movement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Movement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Coordinate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/Coordinate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/StepRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/StepRecorder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/GamePlatformPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GamePlatformPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ChessPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ChessPane.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

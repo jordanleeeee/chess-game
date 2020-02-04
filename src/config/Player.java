@@ -16,6 +16,7 @@ public class Player {
     private String name;
     private ArrayList<Chess> ownedChess;
     private King king;
+    private boolean isBlack;
 
     Player(String name){
         this.name = name;
@@ -23,13 +24,14 @@ public class Player {
 
     void addChess(ArrayList<Chess> chess){
         ownedChess = chess;
-        identifyKing();
+        identifyKingAndColor();
     }
 
-    private void identifyKing(){
+    private void identifyKingAndColor(){
         for(Chess oneChess: ownedChess){
             if(oneChess instanceof King){
                 king = (King)oneChess;
+                isBlack = king.isBlack();
                 break;
             }
         }
@@ -38,8 +40,11 @@ public class Player {
     public String getName(){ return name; }
 
     void processEachRound(){
+        if(isLoss()){
+            ChessManager.getInstance().generateLoseNotification(true);
+            return;
+        }
         if (isInDanger()) {
-            System.out.println("Check...........");
             GamePlatformPane.getInstance().setSpecialNotice("Check...........");
         }
         addEventHandler();
@@ -52,12 +57,12 @@ public class Player {
         }
     }
 
-    void isResign(){
+    void wantResign(){
         ButtonType OK = new ButtonType("OK");
         Alert optForResign = new Alert(Alert.AlertType.WARNING, "Are you sure you want to resign?", OK, ButtonType.CANCEL);
         optForResign.showAndWait().ifPresent(type -> {
             if (type == OK) {
-                ChessManager.getInstance().praseTheWinner(king.isBlack(), false);
+                ChessManager.getInstance().generateLoseNotification(false);
             }
         });
     }

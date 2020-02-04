@@ -54,8 +54,8 @@ public class ChessManager {
             blackChess.add(new Pawn(1,i, true));
         }
 
-        for (int i=0; i<ChessPane.width; i++){
-            whiteChess.add(new Pawn(6,i, false));
+        for (int i = 0; i < ChessPane.width; i++) {
+            whiteChess.add(new Pawn(6, i, false));
         }
         whiteChess.add(new Rook(7,7, false));
         whiteChess.add(new Knight(7,6, false));
@@ -68,10 +68,8 @@ public class ChessManager {
     }
 
     private void visualizeChess(ArrayList<Chess> chess){
-        for(Chess oneChess: chess){
-            Label target = chessPane.getOneCell(oneChess.getCoordinate());
-            target.setGraphic(new ImageView(oneChess.getIcon()));
-            target.setAlignment(Pos.CENTER);
+        for (Chess oneChess : chess) {
+            oneChess.visualizeChess();
         }
     }
 
@@ -83,27 +81,29 @@ public class ChessManager {
         goNextIteration();
     }
 
+    private boolean isBlackTurn(){
+        return (round%2 == 0);
+    }
+
+    private void clearAllEventHandler(){
+        for (int i = 0; i < ChessPane.height; i++) {
+            for (int j = 0; j < ChessPane.width; j++) {
+                Label target = chessPane.getOneCell(i, j);
+                target.setStyle(ChessPane.defaultGridStyle);
+                target.setOnMouseClicked(null);
+            }
+        }
+    }
+
     public void goNextIteration(){
         gamePlatformPane.setSpecialNotice("");
-        System.out.println(stepRecorder.getPreviousMoveDetails());
-
-        boolean isBlackTurn = (++round%2 == 0);
-        if(isGameOver(isBlackTurn)){
-            praseTheWinner(isBlackTurn, true);
-            return;
-        }
-        processPlayer(isBlackTurn);
+        stepRecorder.generatePreviousMoveDetails();
+        round++;
+        processPlayer();
     }
 
-    public void praseTheWinner(boolean isBlackTurn, boolean isCheckmate){
-        String msg = "";
-        if(isCheckmate) { msg += "Checkmate...";}
-        msg+= (isBlackTurn)?"Black": "White";
-        msg+=" loss... Good Job ";
-        msg+= (!isBlackTurn)? black.getName(): white.getName();
-        gamePlatformPane.setSpecialNotice(msg);
-    }
-    private void processPlayer(boolean isBlackTurn){
+    private void processPlayer(){
+        boolean isBlackTurn = isBlackTurn();
         clearAllEventHandler();
         if(isBlackTurn){
             gamePlatformPane.setGameInfo("Black turn");
@@ -115,9 +115,15 @@ public class ChessManager {
         }
     }
 
-    public void updateRecord(@NotNull Chess chess, @NotNull Coordinate from, @NotNull Coordinate to, boolean isKilling, boolean castingHappened){
-        Player player = (chess.isBlack())? black: white;
-        stepRecorder.addStep(new Movement(player, chess, from, to, isKilling, castingHappened));
+    void generateLoseNotification(boolean isCheckmate){
+        String msg = "";
+        if(isCheckmate) { msg += "Checkmate..."; }
+        msg+= (isBlackTurn())?"Black": "White";
+        msg+= (isCheckmate)? " loss": " resign";
+        msg+="... Good Job ";
+        msg+= (!isBlackTurn())? black.getName(): white.getName();
+        msg+=" you win";
+        gamePlatformPane.setSpecialNotice(msg);
     }
 
     /**
@@ -145,6 +151,33 @@ public class ChessManager {
         return false;
     }
 
+    /**
+     * check if any chess being killed after the move. If yes, remove it from the list of chess
+     * @param chess the chess that being move
+     * @param destination the destination of the move
+     * @return true of some chess got killed
+     */
+    public boolean seeIfChessIsKillAfterMove(@NotNull Chess chess, @NotNull Coordinate destination){
+        if(haveChess(destination)){
+            removeOneChess(destination, !chess.isBlack());
+            return true;
+        }
+        return false;
+    }
+
+    public void resign(){
+        getPlayer(isBlackTurn()).wantResign();
+    }
+
+    public void undoStep(){
+        Movement previousMovement = stepRecorder.processUndo();
+        if(previousMovement != null) {
+            previousMovement.reverseMovement();
+            round--;
+            processPlayer();
+        }
+    }
+
     private void removeOneChess(@NotNull Coordinate coord, boolean isBlack){
         if(haveChess(coord)){
             ArrayList<Chess> target = (isBlack)? blackChess: whiteChess;
@@ -163,6 +196,33 @@ public class ChessManager {
         }
     }
 
+    private Player getPlayer(boolean isBlack) {
+        return (isBlack)? black: white;
+    }
+
+    public Chess getOneChess(Coordinate coord){
+        for(Chess oneChess: blackChess){
+            if(oneChess.getCoordinate().equals(coord)){
+                return oneChess;
+            }
+        }
+        for(Chess oneChess: whiteChess){
+            if(oneChess.getCoordinate().equals(coord)){
+                return oneChess;
+            }
+        }
+        return null;
+    }
+
+    public static ChessManager getInstance(){
+        if(INSTANCE == null){
+            INSTANCE = new ChessManager();
+        }
+        return INSTANCE;
+    }
+
+    //Todo not clean code
+
     public void revivalOneChess(){
         Chess target = killedChess.pop();
         if(target == null){
@@ -177,64 +237,22 @@ public class ChessManager {
             killedWhiteChess.pop();
             whiteChess.add(target);
         }
-        chessPane.getOneCell(target.getCoordinate()).setGraphic(new ImageView(target.getIcon()));
-    }
-
-    private void clearAllEventHandler(){
-        for(int i = 0; i< ChessPane.height; i++){
-            for(int j=0; j<ChessPane.width; j++){
-                Label target = chessPane.getOneCell(i, j);
-                target.setStyle(ChessPane.defaultGridStyle);
-                target.setOnMouseClicked(null);
-            }
-        }
-    }
-
-    public void resign(){
-        boolean isBlack = (round%2 ==0);
-        getPlayer(isBlack).isResign();
-    }
-
-    boolean isGameOver(boolean isBlackTurn){
-        return getPlayer(isBlackTurn).isLoss();
+        target.visualizeChess();
     }
 
     public boolean moveAllowed(@NotNull Chess chess, @NotNull Coordinate destination){
+        boolean isAllowed = true;
         Coordinate currentLocation = chess.getCoordinate();
-        boolean haveChessGotKilled = processKillingChess(chess, destination);
+        boolean haveChessGotKilled = seeIfChessIsKillAfterMove(chess, destination);
         chess.setCurrentLocation(destination);
         if (getPlayer(chess.isBlack()).isInDanger()) {
-            chess.setCurrentLocation(currentLocation);
-            if(haveChessGotKilled){
-                revivalOneChess();
-            }
-            return false;
+            isAllowed = false;
         }
         chess.setCurrentLocation(currentLocation);
         if(haveChessGotKilled){
             revivalOneChess();
         }
-        return true;
-    }
-
-    /**
-     * check if some chess being killed, if yes, remove that chess and return true
-     * @return true of some chess being killed
-     */
-    public boolean processKillingChess(@NotNull Chess chess, @NotNull Coordinate destination){
-        if(haveChess(destination)){
-            removeOneChess(destination, !chess.isBlack());
-            return true;
-        }
-        return false;
-    }
-
-    public void undoStep(){
-        Movement previousMovement = stepRecorder.processUndo();
-        if(previousMovement != null) {
-            previousMovement.reverseMovement();
-            processPlayer((--round%2==0));
-        }
+        return isAllowed;
     }
 
     public void chessClicked(@NotNull Chess chess, @NotNull String newType){
@@ -297,33 +315,15 @@ public class ChessManager {
         generateSelectionPane(chess);
     }
 
-    public static ChessManager getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new ChessManager();
-        }
-        return INSTANCE;
-    }
 
     public ArrayList<Chess> getChess(boolean isBlack){
         return (isBlack)? blackChess: whiteChess;
     }
 
-    public Chess getOneChess(Coordinate coord){
-        for(Chess oneChess: blackChess){
-            if(oneChess.getCoordinate().equals(coord)){
-                return oneChess;
-            }
-        }
-        for(Chess oneChess: whiteChess){
-            if(oneChess.getCoordinate().equals(coord)){
-                return oneChess;
-            }
-        }
-        return null;
-    }
 
-    private Player getPlayer(boolean isBlack) {
-        return (isBlack)? black: white;
+    public void updateRecord(@NotNull Chess chess, @NotNull Coordinate from, @NotNull Coordinate to, boolean isKilling, boolean castingHappened){
+        Player player = (chess.isBlack())? black: white;
+        stepRecorder.addStep(new Movement(player, chess, from, to, isKilling, castingHappened));
     }
 
 }

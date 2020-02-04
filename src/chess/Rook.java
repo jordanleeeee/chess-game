@@ -74,6 +74,15 @@ public class Rook extends Chess{
         return possibleMove;
     }
 
+    public void dealWithCasting(){
+//        if(isBlack){
+//
+//        }
+//        else{
+//
+//        }
+    }
+
     @Override
     public String toString() {
         return "Rook";

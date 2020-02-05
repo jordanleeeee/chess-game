@@ -1,6 +1,7 @@
 package chess;
 
 import config.ChessManager;
+import javafx.scene.image.ImageView;
 import util.Coordinate;
 import view.ChessPane;
 import javafx.scene.image.Image;
@@ -75,12 +76,25 @@ public class Rook extends Chess{
     }
 
     public void dealWithCasting(){
-//        if(isBlack){
-//
-//        }
-//        else{
-//
-//        }
+        clearChessIcon();
+        if(isBlack){
+            setCurrentLocation(new Coordinate(0,2));
+        }
+        else{
+            setCurrentLocation(new Coordinate(7,5));
+        }
+        visualizeChess();
+    }
+
+    public void reverseCasting(){
+        clearChessIcon();
+        if(isBlack){
+            setCurrentLocation(new Coordinate(0,0));
+        }
+        else{
+            setCurrentLocation(new Coordinate(7,7));
+        }
+        visualizeChess();
     }
 
     @Override

@@ -16,7 +16,6 @@ public class Player {
     private String name;
     private ArrayList<Chess> ownedChess;
     private King king;
-    private boolean isBlack;
 
     Player(String name){
         this.name = name;
@@ -24,14 +23,13 @@ public class Player {
 
     void addChess(ArrayList<Chess> chess){
         ownedChess = chess;
-        identifyKingAndColor();
+        identifyKing();
     }
 
-    private void identifyKingAndColor(){
+    private void identifyKing(){
         for(Chess oneChess: ownedChess){
             if(oneChess instanceof King){
                 king = (King)oneChess;
-                isBlack = king.isBlack();
                 break;
             }
         }
@@ -44,6 +42,7 @@ public class Player {
             ChessManager.getInstance().generateLoseNotification(true);
             return;
         }
+
         if (isInDanger()) {
             GamePlatformPane.getInstance().setSpecialNotice("Check...........");
         }
@@ -71,7 +70,7 @@ public class Player {
         return king.isCheck();
     }
 
-    boolean isLoss() {
+    private boolean isLoss() {
         return king.isCheckmate();
     }
 }

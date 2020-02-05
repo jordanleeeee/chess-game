@@ -2,6 +2,7 @@ package eventHandler;
 
 import chess.Chess;
 import chess.King;
+import chess.Pawn;
 import config.ChessManager;
 import view.ChessPane;
 import javafx.event.EventHandler;
@@ -29,16 +30,26 @@ public class SelectNextMoveHandler implements EventHandler<MouseEvent> {
         System.out.println("chess clicked "+ chess.getClass().getName());
         ArrayList<Coordinate> availableNextMove = chess.getAvailableNextMovePosition();
         for(Coordinate destination: availableNextMove){
-            Label target = ChessPane.getInstance().getOneCell(destination);
+            Label target = chessPane.getOneCell(destination);
             target.setStyle(ChessPane.defaultAvailableMoveGuideStyle);
-            target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, destination, false));
+            target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, destination, SpecialEvent.NA));
         }
+
         if(chess instanceof King){
             Coordinate castingTarget = ((King) chess).dealWithCastingCase();
             if(castingTarget != null) {
-                Label target = ChessPane.getInstance().getOneCell(castingTarget);
+                Label target = chessPane.getOneCell(castingTarget);
                 target.setStyle(ChessPane.defaultAvailableMoveGuideStyle);
-                target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, castingTarget, true));
+                target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, castingTarget, SpecialEvent.casting));
+            }
+        }
+
+        if(chess instanceof Pawn){
+            Coordinate passantTarget = ((Pawn) chess).dealWithPassant();
+            if(passantTarget != null){
+                Label target = chessPane.getOneCell(passantTarget);
+                target.setStyle(ChessPane.defaultAvailableMoveGuideStyle);
+                target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, passantTarget, SpecialEvent.enPassant));
             }
         }
     }

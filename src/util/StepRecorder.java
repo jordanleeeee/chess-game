@@ -1,5 +1,6 @@
 package util;
 
+import chess.Chess;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import view.GamePlatformPane;
@@ -35,6 +36,15 @@ public class StepRecorder {
         moves.remove(moves.size() - 1);
         return movements.pop();
 
+    }
+
+    public Movement getPreviousMovement(){
+        try {
+            return movements.peek();
+        }
+        catch (EmptyStackException e){
+            return null;
+        }
     }
 
     public ObservableList<String> getMoves(){

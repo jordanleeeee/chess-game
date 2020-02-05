@@ -1,6 +1,7 @@
 package chess;
 
 import config.ChessManager;
+import eventHandler.SpecialEvent;
 import util.Coordinate;
 import view.ChessPane;
 import javafx.scene.image.Image;
@@ -91,7 +92,8 @@ public class King extends Chess{
         for(Chess oneChess: sameColorChess){
             ArrayList<Coordinate> allDestination = oneChess.getAvailableNextMovePosition();
             for(Coordinate oneDestination: allDestination){
-                if(chessManager.moveAllowed(oneChess, oneDestination)){
+                //todo may have bug
+                if(chessManager.isMoveAllowed(oneChess, oneDestination, SpecialEvent.NA)){
                     return false;
                 }
             }

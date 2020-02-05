@@ -2,6 +2,8 @@ package chess;
 
 import config.ChessManager;
 import util.Coordinate;
+import util.Movement;
+import util.StepRecorder;
 import view.ChessPane;
 import javafx.scene.image.Image;
 
@@ -93,6 +95,22 @@ public class Pawn extends Chess{
         else{
             return currentLocation.getRow() == 0;
         }
+    }
+
+    public Coordinate dealWithPassant(){
+        Movement previousMovement = StepRecorder.getInstance().getPreviousMovement();
+
+        if(previousMovement != null) {
+            if (previousMovement.isMovingPawnTwoStepVertically()) {
+                if (previousMovement.getChess().currentLocation.getLHS().equals(currentLocation)) {
+                    return (isBlack)? currentLocation.getBottomRight(): currentLocation.getTopRight();
+                }
+                if (previousMovement.getChess().currentLocation.getRHS().equals(currentLocation)) {
+                    return (isBlack)? currentLocation.getBottomLeft(): currentLocation.getTopLeft();
+                }
+            }
+        }
+        return null;
     }
 
     @Override

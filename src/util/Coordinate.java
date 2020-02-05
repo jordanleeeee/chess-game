@@ -107,7 +107,9 @@ public class Coordinate {
 
     @Override
     public String toString(){
-        return "<"+row+", "+col+">";
+        String infoRow = String.valueOf(8-row);
+        String infoCol = String.valueOf((char)((col+1) + 96));
+        return infoCol + infoRow;
     }
 
 }

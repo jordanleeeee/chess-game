@@ -1,9 +1,11 @@
 package util;
 
 import chess.Chess;
+import chess.Pawn;
 import chess.Rook;
 import config.ChessManager;
 import config.Player;
+import eventHandler.SpecialEvent;
 import javafx.scene.image.ImageView;
 import view.ChessPane;
 
@@ -14,20 +16,36 @@ public class Movement {
     private Coordinate from;
     private Coordinate to;
     private boolean isKilling;
-    private boolean hasCasting;
+    private SpecialEvent specialEvent;
 
-    public Movement(Player player, Chess chess, Coordinate from, Coordinate to, boolean isKilling, boolean hasCasting){
+    private ChessManager chessManager = ChessManager.getInstance();
+    private ChessPane chessPane = ChessPane.getInstance();
+
+    public Movement(Player player, Chess chess, Coordinate from, Coordinate to, boolean isKilling, SpecialEvent specialEvent){
         this.player = player;
         this.chess = chess;
         this.from = from;
         this.to = to;
         this.isKilling = isKilling;
-        this.hasCasting = hasCasting;
+        this.specialEvent = specialEvent;
+
+        processMovement();
+    }
+
+    private void processMovement(){
+        chess.clearChessIcon();
+        chess.setCurrentLocation(to);
+        chess.visualizeChess();
+        chess.setIsMoved();
+
+        if(specialEvent == SpecialEvent.casting){
+            Coordinate rookLocation = (chess.isBlack())? new Coordinate(0, 0): new Coordinate(7, 7);
+            Chess rook = chessManager.getOneChess(rookLocation);
+            ((Rook)rook).dealWithCasting();
+        }
     }
 
     public void reverseMovement(){
-        ChessPane chessPane = ChessPane.getInstance();
-        ChessManager chessManager = ChessManager.getInstance();
         chess.experienceReverseMovement();
         chess.setCurrentLocation(from);
         chessPane.getOneCell(to).setGraphic(null);
@@ -35,18 +53,25 @@ public class Movement {
         if(isKilling){
             ChessManager.getInstance().revivalOneChess();
         }
-        if(hasCasting){
-            if(chess.isBlack()){
-                chessPane.getOneCell(0,0).setGraphic(new ImageView(Rook.blackIcon));
-                chessPane.getOneCell(0,2).setGraphic(null);
-                chessManager.getOneChess(new Coordinate(0,2)).setCurrentLocation(new Coordinate(0, 0));
-            }
-            else{
-                chessPane.getOneCell(7,7).setGraphic(new ImageView(Rook.whiteIcon));
-                chessPane.getOneCell(7,5).setGraphic(null);
-                chessManager.getOneChess(new Coordinate(7,5)).setCurrentLocation(new Coordinate(7, 7));
+
+        if(specialEvent == SpecialEvent.casting) {
+            Coordinate rookLocation = (chess.isBlack()) ? new Coordinate(0, 2) : new Coordinate(7, 5);
+            Chess rook = chessManager.getOneChess(rookLocation);
+            ((Rook) rook).reverseCasting();
+        }
+    }
+
+    public boolean isMovingPawnTwoStepVertically(){
+        if(chess instanceof Pawn){
+            if(from.getCol() == to.getCol()){
+                return (Math.abs(from.getRow() - to.getRow()) == 2);
             }
         }
+        return false;
+    }
+
+    public Chess getChess() {
+        return chess;
     }
 
     @Override

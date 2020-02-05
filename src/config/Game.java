@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.GamePlatformPane;
 
+import java.util.Scanner;
+
 public class Game extends Application {
 
     static private Player white;
@@ -23,7 +25,8 @@ public class Game extends Application {
         ChessManager chessManager = ChessManager.getInstance();
         chessManager.startGame(black, white);
     }
-    public static void main(String[] args){
+
+    private static void assignPlayer(){
 //        Scanner scanner = new Scanner(System.in);
 //        System.out.println("enter name of player 1");
 //        String name;
@@ -38,6 +41,10 @@ public class Game extends Application {
 
         //white = new Player("Sharon");
         white = new Player("Rainbow");
+    }
+
+    public static void main(String[] args){
+        assignPlayer();
         launch(args);
     }
 }

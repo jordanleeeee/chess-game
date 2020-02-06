@@ -8,13 +8,12 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import org.jetbrains.annotations.NotNull;
 import util.Coordinate;
 
 public class ChessPane extends Pane {
 
-    private static final ChessPane INSTANCE = new ChessPane();
+    private static ChessPane INSTANCE = null;
 
     public static final int height = 8;
     public static final int width = 8;
@@ -35,16 +34,20 @@ public class ChessPane extends Pane {
         }
     }
 
-    private void addGridToThePane(int height, int width){
-        Label newLabel = new Label();
-        newLabel.setAlignment(Pos.CENTER);
+    private boolean isBoundary(int height, int width){
+        return (height==0 || width==0 || height==ChessPane.height+1 || width == ChessPane.width+1);
+    }
+
+    private void setGridColor(Label newLabel, int height, int width){
         if((height%2==0 && width%2==0) || (height%2==1 && width%2==1)){
             newLabel.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         }
         else {
             newLabel.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         }
+    }
 
+    private void setBoundaryGrid(Label newLabel, int height, int width){
         if(height==0 && width==0){
             newLabel.setLayoutX(0);
             newLabel.setLayoutY(0);
@@ -97,23 +100,33 @@ public class ChessPane extends Pane {
             newLabel.setPrefWidth(GRID_SIZE);
             newLabel.setText(String.valueOf((char)(width + 96)));
         }
-        else {
-            newLabel.setLayoutX(((width-1) * GRID_SIZE) + BORDER_SIZE);
-            newLabel.setLayoutY(((height-1) * GRID_SIZE) + BORDER_SIZE);
-            newLabel.setPrefHeight(GRID_SIZE);
-            newLabel.setPrefWidth(GRID_SIZE);
-            grids[height-1][width-1] = newLabel;
+        else{
+            throw new IllegalArgumentException();
         }
+    }
+
+    private void setChessboardGrid(Label newLabel, int height, int width){
+        newLabel.setLayoutX(((width-1) * GRID_SIZE) + BORDER_SIZE);
+        newLabel.setLayoutY(((height-1) * GRID_SIZE) + BORDER_SIZE);
+        newLabel.setPrefHeight(GRID_SIZE);
+        newLabel.setPrefWidth(GRID_SIZE);
+        grids[height-1][width-1] = newLabel;
+    }
+
+    private void addGridToThePane(int height, int width){
+        Label newLabel = new Label();
+        newLabel.setAlignment(Pos.CENTER);
         newLabel.setStyle(defaultGridStyle);
+
+        setGridColor(newLabel, height, width);
+        if(isBoundary(height, width)){
+            setBoundaryGrid(newLabel, height, width);
+        }
+        else{
+            setChessboardGrid(newLabel, height, width);
+        }
+
         this.getChildren().add(newLabel);
-    }
-
-    public Label getOneCell(int row, int col){
-        return grids[row][col];
-    }
-
-    public Label getOneCell(@NotNull Coordinate coord){
-        return grids[coord.getRow()][coord.getCol()];
     }
 
     public void blur(){
@@ -124,7 +137,18 @@ public class ChessPane extends Pane {
         this.setOpacity(1);
     }
 
+    public Label getOneCell(int row, int col){
+        return grids[row][col];
+    }
+
+    public Label getOneCell(@NotNull Coordinate coord){
+        return getOneCell(coord.getRow(), coord.getCol());
+    }
+
     public static ChessPane getInstance(){
+        if(INSTANCE == null){
+            INSTANCE = new ChessPane();
+        }
         return INSTANCE;
     }
 }

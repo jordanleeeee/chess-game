@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class King extends Chess{
 
-    public static final Image whiteIcon = new Image("file:resources/whiteKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    public static final Image blackIcon = new Image("file:resources/blackKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image whiteIcon = new Image("file:resources/whiteKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image blackIcon = new Image("file:resources/blackKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public King(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);
@@ -30,14 +30,12 @@ public class King extends Chess{
         return possibleMove;
     }
 
+    /**
+     * @return destination of the chess if casting is possible, null if otherwise
+     */
     public Coordinate dealWithCastingCase(){
         if(canCasting()){
-            if(isBlack){
-                return currentLocation.getLHS().getLHS();
-            }
-            else{
-                return currentLocation.getRHS().getRHS();
-            }
+            return (isBlack)? currentLocation.getLHS().getLHS(): currentLocation.getRHS().getRHS();
         }
         return null;
     }
@@ -84,7 +82,7 @@ public class King extends Chess{
 
     /**
      * check if is in Checkmate condition i.e. no possible move to protect the king
-     * @return true if yes
+     * @return true if yes, false if otherwise
      */
     public boolean isCheckmate(){
         ChessManager chessManager = ChessManager.getInstance();
@@ -92,7 +90,6 @@ public class King extends Chess{
         for(Chess oneChess: sameColorChess){
             ArrayList<Coordinate> allDestination = oneChess.getAvailableNextMovePosition();
             for(Coordinate oneDestination: allDestination){
-                //todo may have bug
                 if(chessManager.isMoveAllowed(oneChess, oneDestination, SpecialEvent.NA)){
                     return false;
                 }

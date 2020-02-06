@@ -17,7 +17,7 @@ public class Player {
     private ArrayList<Chess> ownedChess;
     private King king;
 
-    Player(String name){
+    public Player(String name){
         this.name = name;
     }
 
@@ -34,8 +34,6 @@ public class Player {
             }
         }
     }
-
-    public String getName(){ return name; }
 
     void processEachRound(){
         if(isLoss()){
@@ -73,4 +71,6 @@ public class Player {
     private boolean isLoss() {
         return king.isCheckmate();
     }
+
+    public String getName(){ return name; }
 }

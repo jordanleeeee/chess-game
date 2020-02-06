@@ -10,37 +10,26 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
-import util.StepRecorder;
+import config.StepRecorder;
 
 public class GamePlatformPane extends Pane {
 
     private static GamePlatformPane INSTANCE = null;
 
-    private Label gameInfo = new Label();
-    private Label specialNotice = new Label();
+    private Label gameInfo;
+    private Label specialNotice;
 
     private GamePlatformPane(Player black, Player white){
         Label playerDetails = new Label();
         playerDetails.setText("Black: "+ black.getName() +" vs White: "+ white.getName());
         playerDetails.setPrefHeight(30);
-        ListView<String> stepsView = new ListView<>(StepRecorder.getInstance().getMoves());
-        stepsView.setPrefWidth(250);
 
-        HBox middleBox = new HBox();
-        ChessPane chessPane = ChessPane.getInstance();
-        middleBox.getChildren().add(chessPane);
-        middleBox.getChildren().add(stepsView);
+        gameInfo = new Label();
+        specialNotice = new Label();
+        setSpecialNotice("Game start");
 
-        HBox bottomBox = new HBox();
-        bottomBox.setAlignment(Pos.CENTER);
-        bottomBox.setStyle("-fx-padding: 10;");
-        Button undoButton = new BigButton("Undo");
-        undoButton.setOnAction(e -> ChessManager.getInstance().undoStep());
-        Button resignButton = new BigButton("Resign");
-        resignButton.setOnAction( e-> ChessManager.getInstance().resign() );
-        bottomBox.getChildren().add(undoButton);
-        bottomBox.getChildren().add(resignButton);
-
+        HBox middleBox = getMiddlePane();
+        HBox bottomBox = getBottomPane();
 
         VBox vBox = new VBox();
         vBox.getChildren().add(playerDetails);
@@ -51,6 +40,34 @@ public class GamePlatformPane extends Pane {
         vBox.setAlignment(Pos.CENTER);
 
         this.getChildren().add(vBox);
+    }
+
+    private HBox getMiddlePane(){
+        HBox middleBox = new HBox();
+
+        ListView<String> stepsView = new ListView<>(StepRecorder.getInstance().getMoves());
+        stepsView.setPrefWidth(250);
+        ChessPane chessPane = ChessPane.getInstance();
+
+        middleBox.getChildren().add(chessPane);
+        middleBox.getChildren().add(stepsView);
+        return middleBox;
+    }
+
+    private HBox getBottomPane(){
+        HBox bottomBox = new HBox();
+        bottomBox.setAlignment(Pos.CENTER);
+        bottomBox.setStyle("-fx-padding: 10;");
+
+        Button undoButton = new BigButton("Undo");
+        undoButton.setOnAction(e -> ChessManager.getInstance().undoStep());
+
+        Button resignButton = new BigButton("Resign");
+        resignButton.setOnAction( e-> ChessManager.getInstance().resign() );
+
+        bottomBox.getChildren().add(undoButton);
+        bottomBox.getChildren().add(resignButton);
+        return bottomBox;
     }
 
     public void setGameInfo(String info){

@@ -27,7 +27,7 @@ public class SelectNextMoveHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         changeBackToDefaultChessBoard();
-        System.out.println("chess clicked "+ chess.getClass().getName());
+        System.out.println("chess clicked "+ chess.toString());
         ArrayList<Coordinate> availableNextMove = chess.getAvailableNextMovePosition();
         for(Coordinate destination: availableNextMove){
             Label target = chessPane.getOneCell(destination);
@@ -51,7 +51,7 @@ public class SelectNextMoveHandler implements EventHandler<MouseEvent> {
         }
 
         if(chess instanceof Pawn){
-            Coordinate passantTarget = ((Pawn) chess).dealWithPassant();
+            Coordinate passantTarget = ((Pawn) chess).dealWithEnPassant();
             if(passantTarget != null){
                 Label target = chessPane.getOneCell(passantTarget);
                 target.setStyle(ChessPane.defaultAvailableMoveGuideStyle);

@@ -3,7 +3,6 @@ package config;
 import chess.*;
 import eventHandler.SpecialEvent;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import org.jetbrains.annotations.NotNull;
 import util.*;
 import view.promotionSelectionStage;
@@ -73,7 +72,7 @@ public class ChessManager {
         }
     }
 
-    void startGame(@NotNull Player black, @NotNull Player white){
+    public void startGame(@NotNull Player black, @NotNull Player white){
         black.addChess(blackChess);
         white.addChess(whiteChess);
         this.black = black;
@@ -96,8 +95,6 @@ public class ChessManager {
     }
 
     public void goNextIteration(){
-        gamePlatformPane.setSpecialNotice("");
-        stepRecorder.generatePreviousMoveDetails();
         round++;
         processPlayer();
     }
@@ -214,6 +211,7 @@ public class ChessManager {
         Player player = (chess.isBlack())? black: white;
         Movement movement = new Movement(player, chess, from, to, isKilling, specialEvent);
         stepRecorder.addStep(movement);
+        gamePlatformPane.setSpecialNotice("");
     }
 
     public void revivalOneChess(){

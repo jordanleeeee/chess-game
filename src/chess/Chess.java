@@ -26,19 +26,18 @@ public abstract class Chess {
     public Coordinate getCoordinate(){
         return currentLocation;
     }
-    public void setCurrentLocation(Coordinate currentLocation) {
-        this.currentLocation = currentLocation;
-    }
     public boolean isBlack() {
         return isBlack;
     }
-    public Image getIcon() {
-        return (isBlack)? blackIcon: whiteIcon;
+
+    public void setCurrentLocation(Coordinate currentLocation) {
+        this.currentLocation = currentLocation;
     }
     public void setIsMoved(){
         movingTimes++;
         visualizeChess();
     }
+
     public void experienceReverseMovement(){
         movingTimes--;
     }

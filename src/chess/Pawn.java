@@ -3,7 +3,7 @@ package chess;
 import config.ChessManager;
 import util.Coordinate;
 import util.Movement;
-import util.StepRecorder;
+import config.StepRecorder;
 import view.ChessPane;
 import javafx.scene.image.Image;
 
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 //兵
 public class Pawn extends Chess{
 
-    public static final Image whiteIcon = new Image("file:resources/whitePawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    public static final Image blackIcon = new Image("file:resources/blackPawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image whiteIcon = new Image("file:resources/whitePawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image blackIcon = new Image("file:resources/blackPawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public Pawn(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);
@@ -88,7 +88,7 @@ public class Pawn extends Chess{
         return false;
     }
 
-    public boolean isReachedBoundary(){
+    private boolean isReachedBoundary(){
         if(isBlack){
             return currentLocation.getRow() == ChessPane.height - 1;
         }
@@ -104,8 +104,10 @@ public class Pawn extends Chess{
         setCurrentLocation(temp);
         return isReachedBoundary;
     }
-
-    public Coordinate dealWithPassant(){
+    /**
+     * @return destination of the chess if en passant is possible, null if otherwise
+     */
+    public Coordinate dealWithEnPassant(){
         Movement previousMovement = StepRecorder.getInstance().getPreviousMovement();
 
         if(previousMovement != null) {

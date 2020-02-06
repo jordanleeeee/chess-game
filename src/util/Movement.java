@@ -65,7 +65,6 @@ public class Movement {
         }
 
         if(specialEvent == SpecialEvent.promotion){
-            System.out.println(chess.toString() + " at "+ chess.getCoordinate().toString());
             ArrayList<Chess> groupOfChess = chessManager.getChess(chess.isBlack());
             groupOfChess.add(chess);
             for(int i=0; i<groupOfChess.size(); i++){
@@ -86,9 +85,7 @@ public class Movement {
         return false;
     }
 
-    public Chess getChess() {
-        return chess;
-    }
+    public Chess getChess() { return chess; }
 
     @Override
     public String toString(){

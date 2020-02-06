@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class Coordinate {
 
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
 
     public Coordinate(int row, int col){
         this.row = row;
@@ -93,13 +93,9 @@ public class Coordinate {
         throw new IllegalArgumentException();
     }
 
-    public int getCol() {
-        return col;
-    }
+    public int getCol() { return col; }
 
-    public int getRow() {
-        return row;
-    }
+    public int getRow() { return row; }
 
     public boolean isValidCoordinate(){
         return (row>=0 && col>=0 && row<ChessPane.height && col<ChessPane.width);

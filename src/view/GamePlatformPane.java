@@ -24,7 +24,7 @@ public class GamePlatformPane extends Pane {
         playerDetails.setText("Black: "+ black.getName() +" vs White: "+ white.getName());
         playerDetails.setPrefHeight(30);
         ListView<String> stepsView = new ListView<>(StepRecorder.getInstance().getMoves());
-        stepsView.setPrefWidth(270);
+        stepsView.setPrefWidth(250);
 
         HBox middleBox = new HBox();
         ChessPane chessPane = ChessPane.getInstance();
@@ -33,7 +33,7 @@ public class GamePlatformPane extends Pane {
 
         HBox bottomBox = new HBox();
         bottomBox.setAlignment(Pos.CENTER);
-        bottomBox.setStyle("-fx-padding: 10 10 10 10;");
+        bottomBox.setStyle("-fx-padding: 10;");
         Button undoButton = new BigButton("Undo");
         undoButton.setOnAction(e -> ChessManager.getInstance().undoStep());
         Button resignButton = new BigButton("Resign");

@@ -97,6 +97,14 @@ public class Pawn extends Chess{
         }
     }
 
+    public boolean willReachedBoundary(Coordinate destination){
+        Coordinate temp = currentLocation;
+        setCurrentLocation(destination);
+        boolean isReachedBoundary = isReachedBoundary();
+        setCurrentLocation(temp);
+        return isReachedBoundary;
+    }
+
     public Coordinate dealWithPassant(){
         Movement previousMovement = StepRecorder.getInstance().getPreviousMovement();
 

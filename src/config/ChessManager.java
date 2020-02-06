@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import org.jetbrains.annotations.NotNull;
 import util.*;
-import view.ButtonSelectionStage;
+import view.promotionSelectionStage;
 import view.ChessPane;
 import view.GamePlatformPane;
 
@@ -214,12 +214,6 @@ public class ChessManager {
         Player player = (chess.isBlack())? black: white;
         Movement movement = new Movement(player, chess, from, to, isKilling, specialEvent);
         stepRecorder.addStep(movement);
-
-        if(chess instanceof Pawn){
-            if(((Pawn) chess).isReachedBoundary()){
-                generatePromotionSelectionPane(chess);
-            }
-        }
     }
 
     public void revivalOneChess(){
@@ -285,57 +279,55 @@ public class ChessManager {
 
     public void chessClicked(@NotNull Chess chess, @NotNull String newType){
         ArrayList<Chess> target = (chess.isBlack())? blackChess: whiteChess;
+        Chess newChess = null;
+        int i;
+
         switch (newType) {
             case "Queen":
-                for(int i=0; i<target.size(); i++){
+                for(i=0; i<target.size(); i++){
                     if(target.get(i) == chess){
-                        Chess newChess = new Queen(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
-                        target.add(newChess);
-                        chessPane.getOneCell(chess.getCoordinate()).setGraphic(new ImageView(newChess.getIcon()));
-                        target.remove(i);
+                        newChess = new Queen(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
                         break;
                     }
                 }
                 break;
             case "Knight":
-                for(int i=0; i<target.size(); i++){
+                for(i=0; i<target.size(); i++){
                     if(target.get(i) == chess){
-                        Chess newChess = new Knight(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
-                        target.add(newChess);
-                        chessPane.getOneCell(chess.getCoordinate()).setGraphic(new ImageView(newChess.getIcon()));
-                        target.remove(i);
+                        newChess = new Knight(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
                         break;
                     }
                 }
                 break;
             case "Bishop":
-                for(int i=0; i<target.size(); i++){
+                for(i=0; i<target.size(); i++){
                     if(target.get(i) == chess){
-                        Chess newChess = new Bishop(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
-                        target.add(newChess);
-                        chessPane.getOneCell(chess.getCoordinate()).setGraphic(new ImageView(newChess.getIcon()));
-                        target.remove(i);
+                        newChess = new Bishop(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
                         break;
                     }
                 }
                 break;
             case "Rook":
-                for(int i=0; i<target.size(); i++){
+                for(i=0; i<target.size(); i++){
                     if(target.get(i) == chess){
-                        Chess newChess = new Rook(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
-                        target.add(newChess);
-                        chessPane.getOneCell(chess.getCoordinate()).setGraphic(new ImageView(newChess.getIcon()));
-                        target.remove(i);
+                        newChess = new Rook(chess.getCoordinate().getRow(), chess.getCoordinate().getCol(), chess.isBlack());
                         break;
                     }
                 }
                 break;
             default: throw new IllegalStateException();
         }
+        assert newChess != null;
+
+        target.set(i, newChess);
+        newChess.visualizeChess();
+
+
     }
 
-    private void generatePromotionSelectionPane(@NotNull Chess chess){
-        ButtonSelectionStage stage = new ButtonSelectionStage(chess);
+    public void generatePromotionSelectionPane(@NotNull Chess chess){
+        clearAllEventHandler();
+        promotionSelectionStage stage = new promotionSelectionStage(chess);
         chessPane.blur();
         stage.showAndWait();
         chessPane.unblur();

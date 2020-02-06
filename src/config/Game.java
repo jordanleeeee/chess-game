@@ -38,9 +38,7 @@ public class Game extends Application {
 
         black = new Player("Jordan");
         //white = new Player("Carolyn");
-
-        //white = new Player("Sharon");
-        white = new Player("Rainbow");
+        white = new Player("anonymous");
     }
 
     public static void main(String[] args){

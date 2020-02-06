@@ -32,6 +32,12 @@ public class SelectNextMoveHandler implements EventHandler<MouseEvent> {
         for(Coordinate destination: availableNextMove){
             Label target = chessPane.getOneCell(destination);
             target.setStyle(ChessPane.defaultAvailableMoveGuideStyle);
+            if(chess instanceof Pawn){
+                if(((Pawn) chess).willReachedBoundary(destination)){
+                    target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, destination, SpecialEvent.promotion));
+                    continue;
+                }
+            }
             target.setOnMouseClicked(new ConfirmMoveEventHandler(chess, destination, SpecialEvent.NA));
         }
 

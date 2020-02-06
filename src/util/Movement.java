@@ -6,8 +6,8 @@ import chess.Rook;
 import config.ChessManager;
 import config.Player;
 import eventHandler.SpecialEvent;
-import javafx.scene.image.ImageView;
-import view.ChessPane;
+
+import java.util.ArrayList;
 
 public class Movement {
 
@@ -19,7 +19,6 @@ public class Movement {
     private SpecialEvent specialEvent;
 
     private ChessManager chessManager = ChessManager.getInstance();
-    private ChessPane chessPane = ChessPane.getInstance();
 
     public Movement(Player player, Chess chess, Coordinate from, Coordinate to, boolean isKilling, SpecialEvent specialEvent){
         this.player = player;
@@ -43,21 +42,38 @@ public class Movement {
             Chess rook = chessManager.getOneChess(rookLocation);
             ((Rook)rook).dealWithCasting();
         }
+
+        if(specialEvent == SpecialEvent.promotion){
+            chessManager.generatePromotionSelectionPane(chess);
+        }
     }
 
     public void reverseMovement(){
         chess.experienceReverseMovement();
+        chess.clearChessIcon();
         chess.setCurrentLocation(from);
-        chessPane.getOneCell(to).setGraphic(null);
-        chessPane.getOneCell(from).setGraphic(new ImageView(chess.getIcon()));
+        chess.visualizeChess();
+
         if(isKilling){
-            ChessManager.getInstance().revivalOneChess();
+            chessManager.revivalOneChess();
         }
 
         if(specialEvent == SpecialEvent.casting) {
             Coordinate rookLocation = (chess.isBlack()) ? new Coordinate(0, 2) : new Coordinate(7, 5);
             Chess rook = chessManager.getOneChess(rookLocation);
             ((Rook) rook).reverseCasting();
+        }
+
+        if(specialEvent == SpecialEvent.promotion){
+            System.out.println(chess.toString() + " at "+ chess.getCoordinate().toString());
+            ArrayList<Chess> groupOfChess = chessManager.getChess(chess.isBlack());
+            groupOfChess.add(chess);
+            for(int i=0; i<groupOfChess.size(); i++){
+                if(groupOfChess.get(i).getCoordinate().equals(to)){
+                    groupOfChess.remove(i);
+                    break;
+                }
+            }
         }
     }
 

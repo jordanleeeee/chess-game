@@ -1,3 +1,3 @@
 package eventHandler;
 
-public enum SpecialEvent{casting, enPassant, NA}
+public enum SpecialEvent{casting, enPassant, promotion, NA}

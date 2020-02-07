@@ -65,8 +65,12 @@ public class GamePlatformPane extends Pane {
         Button resignButton = new BigButton("Resign");
         resignButton.setOnAction( e-> ChessManager.getInstance().resign() );
 
+        Button newGameButton = new BigButton("New Game");
+        newGameButton.setOnAction( e-> ChessManager.getInstance().wantNewGame() );
+
         bottomBox.getChildren().add(undoButton);
         bottomBox.getChildren().add(resignButton);
+        bottomBox.getChildren().add(newGameButton);
         return bottomBox;
     }
 

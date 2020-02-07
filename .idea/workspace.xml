@@ -7,12 +7,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20dc7404-5a19-4170-a951-c31f64d6c193" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/chessGame_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/META-INF/chessGame.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/main/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/how to run.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/chessGame_jar/how to run.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/StepRecorder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/StepRecorder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/view/GamePlatformPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/view/GamePlatformPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/ChessManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/ChessManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/StepRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/StepRecorder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/eventHandler/ConfirmMoveEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eventHandler/ConfirmMoveEventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/eventHandler/SelectNextMoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eventHandler/SelectNextMoveHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/eventHandler/SpecialEvent.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GamePlatformPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GamePlatformPane.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +75,7 @@
     <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.Game" />
       <module name="chessGame" />
-      <option name="VM_PARAMETERS" value="--module-path  &quot;C:\Program Files\javafx-sdk-13.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path  &quot;C:\Program Files\javafx-sdk-13.0.1\lib&quot; --add-modules javafx.controls,javafx.media,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -75,6 +84,10 @@
       <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Application.Game" />
+      <item itemvalue="JAR Application.chessGame.jar" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Game" />

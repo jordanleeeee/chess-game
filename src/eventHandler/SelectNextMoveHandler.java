@@ -62,11 +62,11 @@ public class SelectNextMoveHandler implements EventHandler<MouseEvent> {
 
     private void changeBackToDefaultChessBoard(){
         for(int i = 0; i< ChessPane.height; i++){
-            for(int j=0; j<ChessPane.width; j++){
+            for (int j = 0; j < ChessPane.width; j++) {
                 Label target = chessPane.getOneCell(i, j);
                 target.setStyle(ChessPane.defaultGridStyle);
                 //clear eventHandler of all grid with no same color chess
-                if(!chessManager.haveChess(new Coordinate(i, j), chess.isBlack())){
+                if (!chessManager.haveChess(new Coordinate(i, j), chess.isBlack())) {
                     target.setOnMouseClicked(null);
                 }
             }

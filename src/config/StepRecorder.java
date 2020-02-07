@@ -48,6 +48,11 @@ public class StepRecorder {
         }
     }
 
+    public void clearMemory(){
+        movements.clear();
+        moves.clear();
+    }
+
     public ObservableList<String> getMoves(){
         return moves;
     }

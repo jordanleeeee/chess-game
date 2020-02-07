@@ -1,1 +1,4 @@
-java --module-path="your path to javafx lib" --add-modules="javafx.base,javafx.controls,javafx.graphics,javafx.media" -jar chessGame.jar
+use comand prompt
+go to the directory that contain chessGame.jar
+type the following comand
+java --module-path="YOUR PATH TO JAVAFX LIB" --add-modules="javafx.base,javafx.controls,javafx.graphics,javafx.media" -jar chessGame.jar

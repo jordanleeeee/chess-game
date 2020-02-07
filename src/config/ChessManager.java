@@ -2,6 +2,8 @@ package config;
 
 import chess.*;
 import eventHandler.SpecialEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import org.jetbrains.annotations.NotNull;
 import util.*;
@@ -14,11 +16,11 @@ import java.util.Stack;
 
 public class ChessManager {
 
-
     private static ChessManager INSTANCE = null;
 
     private ChessPane chessPane = ChessPane.getInstance();
     private GamePlatformPane gamePlatformPane = GamePlatformPane.getInstance();
+    private StepRecorder stepRecorder = StepRecorder.getInstance();
 
     private ArrayList<Chess> blackChess = new ArrayList<>();
     private ArrayList<Chess> whiteChess = new ArrayList<>();
@@ -27,11 +29,10 @@ public class ChessManager {
     private Stack<Chess> killedBlackChess = new Stack<>();
     private Stack<Chess> killedWhiteChess = new Stack<>();
 
-    private StepRecorder stepRecorder = StepRecorder.getInstance();
-
     private int round = 1;
     private Player black;
     private Player white;
+    private boolean isGameOver = false;
 
 
     private ChessManager(){
@@ -72,7 +73,14 @@ public class ChessManager {
         }
     }
 
+    private void clearAllChessIcon(ArrayList<Chess> chess){
+        for (Chess oneChess : chess) {
+            oneChess.clearChessIcon();
+        }
+    }
+
     public void startGame(@NotNull Player black, @NotNull Player white){
+        AudioManager.getInstance().playSound(AudioManager.SoundRes.WIN);
         black.addChess(blackChess);
         white.addChess(whiteChess);
         this.black = black;
@@ -113,7 +121,9 @@ public class ChessManager {
     }
 
     void generateLoseNotification(boolean isCheckmate){
+        AudioManager.getInstance().playSound(AudioManager.SoundRes.LOSE);
         clearAllEventHandler();
+        isGameOver = true;
         chessPane.blur();
 
         String msg = "";
@@ -195,6 +205,7 @@ public class ChessManager {
     }
 
     public void resign(){
+        chessPane.blur();
         getPlayer(isBlackTurn()).wantResign();
     }
 
@@ -205,6 +216,37 @@ public class ChessManager {
             round--;
             processPlayer();
         }
+    }
+
+    public void wantNewGame(){
+        if(isGameOver){
+            chessPane.unblur();
+            newGame();
+        }
+        else {
+            Alert optForResign = new Alert(Alert.AlertType.WARNING, "Are you sure you want to start a new game? Current game process will not be save.", ButtonType.OK, ButtonType.CANCEL);
+            optForResign.showAndWait().ifPresent(type -> {
+                if (type == ButtonType.OK) {
+                    ChessManager.getInstance().newGame();
+                }
+            });
+        }
+    }
+
+    private void newGame(){
+        round = 1;
+        killedChess.clear();
+        killedBlackChess.clear();
+        killedWhiteChess.clear();
+        clearAllChessIcon(blackChess);
+        clearAllChessIcon(whiteChess);
+        blackChess.clear();
+        whiteChess.clear();
+        addChess();
+        visualizeChess(blackChess);
+        visualizeChess(whiteChess);
+        startGame(black, white);
+        stepRecorder.clearMemory();
     }
 
     public void havingChessMovement(@NotNull Chess chess, @NotNull Coordinate from, @NotNull Coordinate to, boolean isKilling, SpecialEvent specialEvent) {
@@ -272,8 +314,6 @@ public class ChessManager {
         }
         return INSTANCE;
     }
-
-    //Todo not clean code
 
     public void chessClicked(@NotNull Chess chess, @NotNull String newType){
         ArrayList<Chess> target = (chess.isBlack())? blackChess: whiteChess;

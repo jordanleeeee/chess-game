@@ -1,6 +1,7 @@
 package eventHandler;
 
 import chess.Chess;
+import config.AudioManager;
 import config.ChessManager;
 import view.GamePlatformPane;
 import javafx.event.EventHandler;
@@ -26,6 +27,7 @@ public class ConfirmMoveEventHandler implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         if(chessManager.isMoveAllowed(chess, destination, specialEvent)) {
+            AudioManager.getInstance().playSound(AudioManager.SoundRes.MOVE);
             movingChess();
             chessManager.goNextIteration();
         }

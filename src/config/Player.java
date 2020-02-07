@@ -55,11 +55,13 @@ public class Player {
     }
 
     void wantResign(){
-        ButtonType OK = new ButtonType("OK");
-        Alert optForResign = new Alert(Alert.AlertType.WARNING, "Are you sure you want to resign?", OK, ButtonType.CANCEL);
+        Alert optForResign = new Alert(Alert.AlertType.WARNING, "Are you sure you want to resign?", ButtonType.OK, ButtonType.CANCEL);
         optForResign.showAndWait().ifPresent(type -> {
-            if (type == OK) {
+            if (type == ButtonType.OK) {
                 ChessManager.getInstance().generateLoseNotification(false);
+            }
+            else {
+                ChessPane.getInstance().unblur();
             }
         });
     }

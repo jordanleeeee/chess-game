@@ -29,18 +29,18 @@ public class Game extends Application {
     }
 
     private static void assignPlayer(){
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.println("enter name of player 1");
-//        String name;
-//        name = scanner.nextLine();
-//        black = new Player(name);
-//        System.out.println("enter name of player 2");
-//        name = scanner.nextLine();
-//        white = new Player(name);
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("enter name of player 1");
+        String name;
+        name = scanner.nextLine();
+        black = new Player(name);
+        System.out.println("enter name of player 2");
+        name = scanner.nextLine();
+        white = new Player(name);
 
-        black = new Player("Jordan");
-        //white = new Player("Carolyn");
-        white = new Player("anonymous");
+//        black = new Player("Jordan");
+//        //white = new Player("Carolyn");
+//        white = new Player("anonymous");
     }
 
     public static void main(String[] args){

@@ -1,0 +1,1 @@
+java --module-path="C:\Program Files\javafx-sdk-13.0.1\lib" --add-modules="javafx.base,javafx.controls,javafx.graphics,javafx.media" -jar chessGame.jar

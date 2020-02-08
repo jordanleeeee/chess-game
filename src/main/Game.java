@@ -33,10 +33,10 @@ public class Game extends Application {
         System.out.println("enter name of player 1");
         String name;
         name = scanner.nextLine();
-        black = new Player(name);
+        black = new Player(name, true);
         System.out.println("enter name of player 2");
         name = scanner.nextLine();
-        white = new Player(name);
+        white = new Player(name, false);
 
 //        black = new Player("Jordan");
 //        white = new Player("Carolyn");

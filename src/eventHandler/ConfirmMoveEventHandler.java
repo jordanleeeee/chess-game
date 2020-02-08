@@ -32,7 +32,7 @@ public class ConfirmMoveEventHandler implements EventHandler<MouseEvent> {
             chessManager.goNextIteration();
         }
         else{
-            String msg = "moving this chess will kill your king... please choose a better move";
+            String msg = "moving this chess will kill your king... \nPlease choose a better move";
             GamePlatformPane.getInstance().setSpecialNotice(msg);
         }
     }

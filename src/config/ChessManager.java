@@ -80,6 +80,7 @@ public class ChessManager {
     }
 
     public void startGame(@NotNull Player black, @NotNull Player white){
+        gamePlatformPane.setSpecialNotice("Game start");
         AudioManager.getInstance().playSound(AudioManager.SoundRes.WIN);
         black.addChess(blackChess);
         white.addChess(whiteChess);
@@ -127,10 +128,10 @@ public class ChessManager {
         chessPane.blur();
 
         String msg = "";
-        if(isCheckmate) { msg += "Checkmate..."; }
+        if(isCheckmate) { msg += "Checkmate!!! "; }
         msg+= (isBlackTurn())?"Black": "White";
-        msg+= (isCheckmate)? " loss": " resign";
-        msg+="... Good Job ";
+        msg+= (isCheckmate)? " loss...": " resign...";
+        msg+="\nGood Job ";
         msg+= (!isBlackTurn())? black.getName(): white.getName();
         msg+=" you win";
         gamePlatformPane.setSpecialNotice(msg);
@@ -210,6 +211,7 @@ public class ChessManager {
     }
 
     public void undoStep(){
+        gamePlatformPane.setSpecialNotice("");
         Movement previousMovement = stepRecorder.processUndo();
         if(previousMovement != null) {
             previousMovement.reverseMovement();

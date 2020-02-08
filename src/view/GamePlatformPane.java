@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.NotNull;
 import config.StepRecorder;
@@ -26,7 +27,6 @@ public class GamePlatformPane extends Pane {
 
         gameInfo = new Label();
         specialNotice = new Label();
-        setSpecialNotice("Game start");
 
         HBox middleBox = getMiddlePane();
         HBox bottomBox = getBottomPane();
@@ -34,7 +34,6 @@ public class GamePlatformPane extends Pane {
         VBox vBox = new VBox();
         vBox.getChildren().add(playerDetails);
         vBox.getChildren().add(gameInfo);
-        vBox.getChildren().add(specialNotice);
         vBox.getChildren().add(middleBox);
         vBox.getChildren().add(bottomBox);
         vBox.setAlignment(Pos.CENTER);
@@ -47,9 +46,14 @@ public class GamePlatformPane extends Pane {
 
         ListView<String> stepsView = new ListView<>(StepRecorder.getInstance().getMoves());
         stepsView.setPrefWidth(250);
-        ChessPane chessPane = ChessPane.getInstance();
 
-        middleBox.getChildren().add(chessPane);
+        StackPane stackPane = new StackPane();
+        specialNotice.setStyle("-fx-text-fill: red; -fx-font-size: 20pt;");
+        ChessPane chessPane = ChessPane.getInstance();
+        stackPane.getChildren().add(chessPane);
+        stackPane.getChildren().add(specialNotice);
+
+        middleBox.getChildren().add(stackPane);
         middleBox.getChildren().add(stepsView);
         return middleBox;
     }

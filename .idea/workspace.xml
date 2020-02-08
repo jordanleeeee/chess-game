@@ -8,19 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="20dc7404-5a19-4170-a951-c31f64d6c193" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/how to run.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/chessGame_jar/how to run.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/StepRecorder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/StepRecorder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/chessGame/view/GamePlatformPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/view/GamePlatformPane.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/ChessManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/ChessManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/StepRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/StepRecorder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/eventHandler/ConfirmMoveEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eventHandler/ConfirmMoveEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/eventHandler/SelectNextMoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eventHandler/SelectNextMoveHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/eventHandler/SpecialEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/GamePlatformPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/GamePlatformPane.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />

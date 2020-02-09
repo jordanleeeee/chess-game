@@ -10,12 +10,27 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/main/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/main/Game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/view/promotionSelectionStage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/view/promotionSelectionStage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/blackBishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/blackKing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/blackKnight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/blackPawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/blackQueen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/blackRook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/whiteBishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/whiteKing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/whiteKnight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/whitePawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/whiteQueen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/whiteRook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Bishop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/King.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Pawn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Queen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Rook.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config/ChessManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/ChessManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/promotionSelectionStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/promotionSelectionStage.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

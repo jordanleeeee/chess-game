@@ -1,7 +1,12 @@
-## **A chess game constructed by java and javafx with OOP concept**
+## **A chess game constructed by Java and Javafx with OOP concept**
 
-chess rules can be found at https://en.wikipedia.org/wiki/Chess
+Chess rules can be found at https://en.wikipedia.org/wiki/Chess
 
-this program support all moving rules including casting and en Passant. Extra feature(undo and step record) has been made.
+This program support all moving rules including casting and en Passant. 
+Chess must move according to rules, invalid move is not allowed. 
+Moreover, a game is lose only when checkmate or resign, intentionally or unintentionally to place King in danger is prohibited.
+The program can detect checkmate automatically, notification will be generated once checkmate occur.
 
-chess image is not so clear as it is hard to found good image on the internet, sorry about that...
+Extra feature(undo and step record) has been made. 
+
+Chess image is not so clear as it is hard to found good image on the internet, sorry about that...

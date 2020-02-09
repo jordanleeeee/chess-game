@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class King extends Chess{
 
-    private static final Image whiteIcon = new Image("file:resources/whiteKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private static final Image blackIcon = new Image("file:resources/blackKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image whiteIcon = new Image("file:resources/image/whiteKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image blackIcon = new Image("file:resources/image/blackKing.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public King(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);

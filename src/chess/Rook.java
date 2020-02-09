@@ -11,8 +11,8 @@ import java.util.ArrayList;
 //城堡
 public class Rook extends Chess{
 
-    public static final Image whiteIcon = new Image("file:resources/whiteRook.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    public static final Image blackIcon = new Image("file:resources/blackRook.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image whiteIcon = new Image("file:resources/image/whiteRook.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image blackIcon = new Image("file:resources/image/blackRook.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public Rook(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);

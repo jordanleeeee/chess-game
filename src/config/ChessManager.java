@@ -16,7 +16,7 @@ import java.util.Stack;
 
 public class ChessManager {
 
-    private static ChessManager INSTANCE = null;
+    private static ChessManager INSTANCE = new ChessManager();
 
     private ChessPane chessPane = ChessPane.getInstance();
     private GamePlatformPane gamePlatformPane = GamePlatformPane.getInstance();
@@ -39,6 +39,10 @@ public class ChessManager {
         goNextIteration();
     }
 
+    /**
+     * check which player takes turn, according to rules: black go first in a new game
+     * @return true if black takes turn, false if otherwise
+     */
     private boolean isBlackTurn(){
         return (round%2 == 1);
     }
@@ -272,6 +276,7 @@ public class ChessManager {
         black.processNewGame();
         white.processNewGame();
         stepRecorder.clearMemory();
+        isGameOver = false;
         startGame(black, white);
     }
 
@@ -306,9 +311,6 @@ public class ChessManager {
     }
 
     public static ChessManager getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new ChessManager();
-        }
         return INSTANCE;
     }
 }

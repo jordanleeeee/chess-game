@@ -11,8 +11,8 @@ import java.util.ArrayList;
 //兵
 public class Pawn extends Chess{
 
-    private static final Image whiteIcon = new Image("file:resources/whitePawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private static final Image blackIcon = new Image("file:resources/blackPawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image whiteIcon = new Image("file:resources/image/whitePawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    private static final Image blackIcon = new Image("file:resources/image/blackPawn.png", ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
 
     public Pawn(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);

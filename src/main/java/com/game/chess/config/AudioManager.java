@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.Set;
 
 public class AudioManager {
-
     private static final AudioManager INSTANCE = new AudioManager();
     private final Set<MediaPlayer> soundPool = new HashSet<>();
 

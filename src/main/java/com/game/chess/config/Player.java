@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-
     private final String name;
     private final List<Chess> ownedChess = new ArrayList<>();
     private King king;

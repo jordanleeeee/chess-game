@@ -7,7 +7,6 @@ import com.game.chess.util.Coordinate;
 import com.game.chess.view.ChessPane;
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

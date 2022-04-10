@@ -1,130 +1,195 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactsWorkspaceSettings">
-    <artifacts-to-build>
-      <artifact name="chessGame:jar" />
-    </artifacts-to-build>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20dc7404-5a19-4170-a951-c31f64d6c193" name="Default Changelist" comment="">
+    <list default="true" id="1bef2aff-67d3-4980-bd5c-486300d4c163" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/$PRODUCT_WORKSPACE_FILE$" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/chessGame_jar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/User3w.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/chessGame/view/promotionSelectionStage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/chessGame/view/promotionSelectionStage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/blackBishop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/blackKing.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/blackKnight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/blackPawn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/blackQueen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/blackRook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/whiteBishop.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/whiteKing.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/whiteKnight.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/whitePawn.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/whiteQueen.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/whiteRook.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/Bishop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Bishop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/King.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/King.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Knight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/Pawn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Pawn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/Queen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Queen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/chess/Rook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/chess/Rook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/ChessManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/ChessManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/promotionSelectionStage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/promotionSelectionStage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chessGame.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/how to run.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/playChess.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/audio/lose.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/audio/move.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/audio/win.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/blackBishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/blackKing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/blackKnight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/blackPawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/blackQueen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/blackRook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/whiteBishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/whiteKing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/whiteKnight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/whitePawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/whiteQueen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/chessGame_jar/resources/image/whiteRook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Bishop.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Chess.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/King.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Knight.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Pawn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Queen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/Chess/Rook.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/AudioManager$SoundRes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/AudioManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/ChessManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/config/StepRecorder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/eventHandler/ConfirmMoveEventHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/eventHandler/SelectNextMoveHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/eventHandler/SpecialEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/main/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/util/Coordinate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/util/Movement.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/view/BigButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/view/ChessPane.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/view/GamePlatformPane.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/chessGame/view/promotionSelectionStage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/audio/lose.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/audio/move.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/audio/win.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/blackBishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/blackKing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/blackKnight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/blackPawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/blackQueen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/blackRook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/whiteBishop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/whiteKing.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/whiteKnight.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/whitePawn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/whiteQueen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/image/whiteRook.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Bishop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Chess.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/King.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Knight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Pawn.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Queen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/chess/Rook.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/AudioManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/ChessManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/StepRecorder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/eventHandler/ConfirmMoveEventHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/eventHandler/SelectNextMoveHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/eventHandler/SpecialEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Coordinate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Movement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BigButton.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ChessPane.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GamePlatformPane.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/promotionSelectionStage.java" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="package-info" />
-        <option value="Class" />
-      </list>
-    </option>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="chess" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1XCYreWIaddbzZE8CrKYmQQeK0P" />
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="gke_lott-dev-v3_asia-east2-b_ub-dev" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="27ac96cpdCEqoUfpI3YD5pDYsMC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
-    <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.37876803" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="config" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/main/java/com/game/chess" />
+      <recent name="$PROJECT_DIR$/src/main/resources/com/game/chess" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Application.Game">
-    <configuration name="Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.Game" />
-      <module name="chessGame" />
-      <option name="VM_PARAMETERS" value="--module-path  &quot;C:\Program Files\javafx-sdk-13.0.1\lib&quot; --add-modules javafx.controls,javafx.media,javafx.fxml" />
+  <component name="RunManager">
+    <configuration name="ChessApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.game.chess.ChessApplication" />
+      <module name="chess.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.game.chess.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="chessGame.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/chessGame_jar/chessGame.jar" />
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Application.Game" />
-      <item itemvalue="JAR Application.chessGame.jar" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Game" />
-        <item itemvalue="JAR Application.chessGame.jar" />
+        <item itemvalue="Application.ChessApplication" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SvnConfiguration">
-    <configuration />
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="20dc7404-5a19-4170-a951-c31f64d6c193" name="Default Changelist" comment="" />
-      <created>1580551743281</created>
+      <changelist id="1bef2aff-67d3-4980-bd5c-486300d4c163" name="Changes" comment="" />
+      <created>1649561485580</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1580551743281</updated>
+      <updated>1649561485580</updated>
+      <workItem from="1649561488732" duration="3625000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>

@@ -1,4 +1,4 @@
-## **A chess game constructed by Java and Javafx with OOP concept**
+## **A chess game constructed by Java and Javafx**
 
 Chess rules can be found at https://en.wikipedia.org/wiki/Chess
 
@@ -8,5 +8,3 @@ Moreover, a game is lose only when checkmate or resign, intentionally or uninten
 The program can detect checkmate automatically, notification will be generated once checkmate occur.
 
 Extra feature(undo and step record) has been made. 
-
-Chess image is not so clear as it is hard to found good image on the internet, sorry about that...

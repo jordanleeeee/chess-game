@@ -1,19 +1,17 @@
 package com.game.chess.chess;
 
 
-import com.game.chess.ChessApplication;
 import com.game.chess.config.ChessManager;
 import com.game.chess.util.Coordinate;
-import com.game.chess.view.ChessPane;
+import com.game.chess.util.Resources;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Bishop extends Chess {
-    public static final Image whiteIcon = new Image(Objects.requireNonNull(ChessApplication.class.getResource("image/whiteBishop.png")).toString(), ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    public static final Image blackIcon = new Image(Objects.requireNonNull(ChessApplication.class.getResource("image/blackBishop.png")).toString(), ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image whiteIcon = Resources.imageFromPath("image/whiteBishop.png");
+    public static final Image blackIcon = Resources.imageFromPath("image/blackBishop.png");
 
     public Bishop(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);

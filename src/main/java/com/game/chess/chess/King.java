@@ -1,18 +1,16 @@
 package com.game.chess.chess;
 
-import com.game.chess.ChessApplication;
 import com.game.chess.config.ChessManager;
 import com.game.chess.eventHandler.SpecialEvent;
 import com.game.chess.util.Coordinate;
-import com.game.chess.view.ChessPane;
+import com.game.chess.util.Resources;
 import javafx.scene.image.Image;
 
 import java.util.List;
-import java.util.Objects;
 
 public class King extends Chess {
-    private static final Image whiteIcon = new Image(Objects.requireNonNull(ChessApplication.class.getResource("image/whiteKing.png")).toString(), ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private static final Image blackIcon = new Image(Objects.requireNonNull(ChessApplication.class.getResource("image/blackKing.png")).toString(), ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image whiteIcon = Resources.imageFromPath("image/whiteKing.png");
+    public static final Image blackIcon = Resources.imageFromPath("image/blackKing.png");
 
     public King(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);

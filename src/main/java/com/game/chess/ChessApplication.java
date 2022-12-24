@@ -4,11 +4,9 @@ import com.game.chess.config.ChessManager;
 import com.game.chess.config.Player;
 import com.game.chess.view.GamePlatformPane;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class ChessApplication extends Application {

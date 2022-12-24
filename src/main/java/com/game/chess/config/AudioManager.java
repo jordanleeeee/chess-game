@@ -1,12 +1,10 @@
 package com.game.chess.config;
 
-import com.game.chess.ChessApplication;
+import com.game.chess.util.Resources;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import java.net.URL;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class AudioManager {
@@ -33,8 +31,7 @@ public class AudioManager {
     }
 
     private void playFile(final String name) {
-        URL resource = ChessApplication.class.getResource("audio/" + name + ".mp3");
-        Media audio = new Media(Objects.requireNonNull(resource).toString());
+        Media audio = Resources.mediaFromPath("audio/" + name + ".mp3");
         MediaPlayer mediaPlayer = new MediaPlayer(audio);
         soundPool.add(mediaPlayer);
         mediaPlayer.play();

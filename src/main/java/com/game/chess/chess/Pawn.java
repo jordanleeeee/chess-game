@@ -1,22 +1,21 @@
 package com.game.chess.chess;
 
 
-import com.game.chess.ChessApplication;
 import com.game.chess.config.ChessManager;
 import com.game.chess.config.StepRecorder;
 import com.game.chess.util.Coordinate;
 import com.game.chess.util.Movement;
+import com.game.chess.util.Resources;
 import com.game.chess.view.ChessPane;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 //兵
 public class Pawn extends Chess {
-    private static final Image whiteIcon = new Image(Objects.requireNonNull(ChessApplication.class.getResource("image/whitePawn.png")).toString(), ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
-    private static final Image blackIcon = new Image(Objects.requireNonNull(ChessApplication.class.getResource("image/blackPawn.png")).toString(), ChessPane.ICON_SIZE, ChessPane.ICON_SIZE, true, true);
+    public static final Image whiteIcon = Resources.imageFromPath("image/whitePawn.png");
+    public static final Image blackIcon = Resources.imageFromPath("image/blackPawn.png");
 
     public Pawn(int row, int col, boolean isBlack) {
         super(row, col, isBlack, blackIcon, whiteIcon);
